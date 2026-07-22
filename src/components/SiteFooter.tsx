@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Twitter, Youtube, Instagram, Linkedin, MessageCircle } from "lucide-react";
-import { services } from "@/data/services";
+import { serviceList } from "@/data/service-list";
 
 export function SiteFooter() {
   const typology = [
@@ -53,7 +53,7 @@ export function SiteFooter() {
             {services.slice(0, 7).map((s) => (
               <li key={s.slug}>
                 <Link
-                  to="/services/$slug"
+                  to={s.to}
                   params={{ slug: s.slug }}
                   className="hover:text-[color:var(--gold)]"
                 >
