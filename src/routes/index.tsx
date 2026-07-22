@@ -14,6 +14,8 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import heroVilla from "@/assets/hero-villa.jpg";
 import projectValley from "@/assets/project-valley.jpg";
 import projectVss from "@/assets/project-vss.jpg";
@@ -113,9 +115,10 @@ const blogs = [
 
 function Home() {
   const [open, setOpen] = useState(false);
+  void open; void setOpen;
   return (
     <div id="home" className="min-h-screen bg-background text-foreground">
-      <Header open={open} setOpen={setOpen} />
+      <SiteHeader />
       <Hero />
       <About />
       <Services />
@@ -126,10 +129,11 @@ function Home() {
       <Media />
       <Blogs />
       <ContactForm />
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
+
 
 function Logo({ dark = false }: { dark?: boolean }) {
   return (
