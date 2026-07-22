@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { services } from "@/data/services";
+import { serviceList } from "@/data/service-list";
 
 const nav = [
   { label: "Home", to: "/", hash: "home" as const },
@@ -64,16 +64,16 @@ export function SiteHeader() {
             {servicesOpen && (
               <div className="absolute left-1/2 top-full w-[320px] -translate-x-1/2 pt-3">
                 <div className="rounded-xl border border-white/10 bg-[color:var(--ink)] p-2 shadow-2xl ring-1 ring-[color:var(--gold)]/20">
-                  {services.map((s) => (
+                  {serviceList.map((s) => (
                     <Link
                       key={s.slug}
-                      to="/services/$slug"
-                      params={{ slug: s.slug }}
+                      to={s.to}
                       className="block rounded-md px-3 py-2 text-sm text-white/80 transition hover:bg-white/5 hover:text-[color:var(--gold)]"
                     >
                       {s.title}
                     </Link>
                   ))}
+
                 </div>
               </div>
             )}
@@ -133,17 +133,17 @@ export function SiteHeader() {
                 >
                   All Services
                 </Link>
-                {services.map((s) => (
+                {serviceList.map((s) => (
                   <Link
                     key={s.slug}
-                    to="/services/$slug"
-                    params={{ slug: s.slug }}
+                    to={s.to}
                     onClick={() => setOpen(false)}
                     className="text-sm text-white/70"
                   >
                     {s.title}
                   </Link>
                 ))}
+
               </div>
             )}
             {nav.slice(2).map((n) => (

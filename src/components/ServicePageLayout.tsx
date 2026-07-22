@@ -1,79 +1,43 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Phone, Mail } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { getService, services } from "@/data/services";
+import { serviceList } from "@/data/service-list";
 
-export const Route = createFileRoute("/services/$slug")({
-  loader: ({ params }) => {
-    const svc = getService(params.slug);
-    if (!svc) throw notFound();
-    return { svc };
-  },
-  head: ({ loaderData }) => {
-    if (!loaderData) {
-      return { meta: [{ title: "Service not found | Vinra Group" }, { name: "robots", content: "noindex" }] };
-    }
-    const { svc } = loaderData;
-    const title = `${svc.title} | Vinra Group`;
-    return {
-      meta: [
-        { title },
-        { name: "description", content: svc.tagline },
-        { property: "og:title", content: title },
-        { property: "og:description", content: svc.tagline },
-        { property: "og:type", content: "article" },
-        { name: "twitter:card", content: "summary_large_image" },
-      ],
-    };
-  },
-  component: ServiceDetail,
-  notFoundComponent: () => (
-    <div className="min-h-screen bg-background">
-      <SiteHeader />
-      <div className="container-x py-32 text-center">
-        <h1 className="font-display text-4xl">Service not found</h1>
-        <Link to="/services" className="mt-6 inline-flex text-[color:var(--gold)]">Back to all services</Link>
-      </div>
-      <SiteFooter />
-    </div>
-  ),
-});
+export type ServicePageProps = {
+  slug: string;
+  title: string;
+  tagline: string;
+  intro: string;
+  heroImg: string;
+  gallery: string[];
+  features: string[];
+  process: { step: string; detail: string }[];
+};
 
-function ServiceDetail() {
-  const { svc } = Route.useLoaderData();
-  const others = services.filter((s) => s.slug !== svc.slug).slice(0, 3);
+export function ServicePageLayout(props: ServicePageProps) {
+  const others = serviceList.filter((s) => s.slug !== props.slug).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
 
-      {/* Hero */}
       <section className="relative isolate">
-        <img
-          src={svc.img}
-          alt={svc.title}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+        <img src={props.heroImg} alt={props.title} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
         <div className="container-x relative flex min-h-[60vh] flex-col justify-center py-20 text-white">
           <p className="eyebrow">Our Services</p>
-          <h1 className="mt-3 max-w-3xl font-display text-4xl leading-tight md:text-6xl">
-            {svc.title}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-white/85">{svc.tagline}</p>
+          <h1 className="mt-3 max-w-3xl font-display text-4xl leading-tight md:text-6xl">{props.title}</h1>
+          <p className="mt-6 max-w-2xl text-lg text-white/85">{props.tagline}</p>
         </div>
       </section>
 
-      {/* Intro */}
       <section className="py-20">
         <div className="container-x grid gap-12 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <p className="eyebrow">Overview</p>
-            <h2 className="mt-3 font-display text-3xl md:text-4xl">
-              What we deliver
-            </h2>
-            <p className="mt-6 text-lg text-muted-foreground">{svc.intro}</p>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl">What we deliver</h2>
+            <p className="mt-6 text-lg text-muted-foreground">{props.intro}</p>
           </div>
           <aside className="rounded-2xl border border-border bg-[color:var(--cream)] p-8">
             <h3 className="font-display text-xl">Talk to our team</h3>
@@ -99,17 +63,13 @@ function ServiceDetail() {
         </div>
       </section>
 
-      {/* Features */}
       <section className="bg-[color:var(--cream)] py-20">
         <div className="container-x">
           <p className="eyebrow">Capabilities</p>
           <h2 className="mt-3 font-display text-3xl md:text-4xl">What's included</h2>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {svc.features.map((f: string) => (
-              <div
-                key={f}
-                className="flex items-start gap-3 rounded-xl bg-card p-5 ring-1 ring-border"
-              >
+            {props.features.map((f) => (
+              <div key={f} className="flex items-start gap-3 rounded-xl bg-card p-5 ring-1 ring-border">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[color:var(--gold)]" />
                 <span className="text-sm">{f}</span>
               </div>
@@ -118,17 +78,16 @@ function ServiceDetail() {
         </div>
       </section>
 
-      {/* Gallery */}
       <section className="py-20">
         <div className="container-x">
           <p className="eyebrow">Gallery</p>
           <h2 className="mt-3 font-display text-3xl md:text-4xl">On site</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {svc.gallery.map((g: string, i: number) => (
+            {props.gallery.map((g, i) => (
               <div key={i} className="aspect-[4/3] overflow-hidden rounded-2xl">
                 <img
                   src={g}
-                  alt={`${svc.title} ${i + 1}`}
+                  alt={`${props.title} ${i + 1}`}
                   loading="lazy"
                   className="h-full w-full object-cover transition duration-700 hover:scale-105"
                 />
@@ -138,17 +97,14 @@ function ServiceDetail() {
         </div>
       </section>
 
-      {/* Process */}
       <section className="bg-[color:var(--ink)] py-20 text-white">
         <div className="container-x">
           <p className="eyebrow">How we work</p>
           <h2 className="mt-3 font-display text-3xl md:text-4xl">Our process</h2>
           <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {svc.process.map((p: { step: string; detail: string }, i: number) => (
+            {props.process.map((p, i) => (
               <div key={p.step} className="relative rounded-2xl border border-white/10 p-6">
-                <div className="font-display text-4xl text-[color:var(--gold)]">
-                  0{i + 1}
-                </div>
+                <div className="font-display text-4xl text-[color:var(--gold)]">0{i + 1}</div>
                 <h3 className="mt-3 font-display text-lg">{p.step}</h3>
                 <p className="mt-3 text-sm text-white/70">{p.detail}</p>
               </div>
@@ -157,7 +113,6 @@ function ServiceDetail() {
         </div>
       </section>
 
-      {/* Others */}
       <section className="py-20">
         <div className="container-x">
           <div className="flex items-end justify-between">
@@ -173,8 +128,7 @@ function ServiceDetail() {
             {others.map((o) => (
               <Link
                 key={o.slug}
-                to="/services/$slug"
-                params={{ slug: o.slug }}
+                to={o.to}
                 className="group overflow-hidden rounded-2xl bg-card ring-1 ring-border transition hover:shadow-xl"
               >
                 <div className="aspect-[4/3] overflow-hidden">

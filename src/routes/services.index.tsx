@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { services } from "@/data/services";
+import { serviceList } from "@/data/service-list";
 
 export const Route = createFileRoute("/services/")({
   head: () => ({
@@ -44,11 +44,10 @@ function ServicesIndex() {
 
       <section className="py-20">
         <div className="container-x grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((s) => (
+          {serviceList.map((s) => (
             <Link
               key={s.slug}
-              to="/services/$slug"
-              params={{ slug: s.slug }}
+              to={s.to}
               className="group overflow-hidden rounded-2xl bg-card ring-1 ring-border transition hover:shadow-xl"
             >
               <div className="aspect-[4/3] overflow-hidden">
