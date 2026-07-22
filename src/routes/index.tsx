@@ -115,9 +115,10 @@ const blogs = [
 
 function Home() {
   const [open, setOpen] = useState(false);
+  void open; void setOpen;
   return (
     <div id="home" className="min-h-screen bg-background text-foreground">
-      <Header open={open} setOpen={setOpen} />
+      <SiteHeader />
       <Hero />
       <About />
       <Services />
@@ -128,10 +129,11 @@ function Home() {
       <Media />
       <Blogs />
       <ContactForm />
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
+
 
 function Logo({ dark = false }: { dark?: boolean }) {
   return (
