@@ -105,7 +105,7 @@ function ServiceDetail() {
           <p className="eyebrow">Capabilities</p>
           <h2 className="mt-3 font-display text-3xl md:text-4xl">What's included</h2>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {svc.features.map((f) => (
+            {svc.features.map((f: string) => (
               <div
                 key={f}
                 className="flex items-start gap-3 rounded-xl bg-card p-5 ring-1 ring-border"
@@ -124,7 +124,7 @@ function ServiceDetail() {
           <p className="eyebrow">Gallery</p>
           <h2 className="mt-3 font-display text-3xl md:text-4xl">On site</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {svc.gallery.map((g, i) => (
+            {svc.gallery.map((g: string, i: number) => (
               <div key={i} className="aspect-[4/3] overflow-hidden rounded-2xl">
                 <img
                   src={g}
@@ -144,7 +144,7 @@ function ServiceDetail() {
           <p className="eyebrow">How we work</p>
           <h2 className="mt-3 font-display text-3xl md:text-4xl">Our process</h2>
           <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {svc.process.map((p, i) => (
+            {svc.process.map((p: { step: string; detail: string }, i: number) => (
               <div key={p.step} className="relative rounded-2xl border border-white/10 p-6">
                 <div className="font-display text-4xl text-[color:var(--gold)]">
                   0{i + 1}
