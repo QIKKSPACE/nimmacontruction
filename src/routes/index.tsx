@@ -1,19 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Facebook,
-  Twitter,
-  Youtube,
-  Instagram,
-  Linkedin,
-  MessageCircle,
-  ArrowRight,
-  Menu,
-  X,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import heroVilla from "@/assets/hero-villa.jpg";
 import projectValley from "@/assets/project-valley.jpg";
 import projectVss from "@/assets/project-vss.jpg";
