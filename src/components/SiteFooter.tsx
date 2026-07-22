@@ -50,17 +50,14 @@ export function SiteFooter() {
             Services
           </h4>
           <ul className="mt-5 space-y-2 text-sm">
-            {services.slice(0, 7).map((s) => (
+            {serviceList.slice(0, 7).map((s) => (
               <li key={s.slug}>
-                <Link
-                  to={s.to}
-                  params={{ slug: s.slug }}
-                  className="hover:text-[color:var(--gold)]"
-                >
+                <Link to={s.to} className="hover:text-[color:var(--gold)]">
                   {s.title}
                 </Link>
               </li>
             ))}
+
           </ul>
         </div>
         <div>
