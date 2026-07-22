@@ -67,13 +67,13 @@ export function SiteHeader() {
                   {serviceList.map((s) => (
                     <Link
                       key={s.slug}
-                      to="/services/$slug"
-                      params={{ slug: s.slug }}
+                      to={s.to}
                       className="block rounded-md px-3 py-2 text-sm text-white/80 transition hover:bg-white/5 hover:text-[color:var(--gold)]"
                     >
                       {s.title}
                     </Link>
                   ))}
+
                 </div>
               </div>
             )}
@@ -136,14 +136,14 @@ export function SiteHeader() {
                 {serviceList.map((s) => (
                   <Link
                     key={s.slug}
-                    to="/services/$slug"
-                    params={{ slug: s.slug }}
+                    to={s.to}
                     onClick={() => setOpen(false)}
                     className="text-sm text-white/70"
                   >
                     {s.title}
                   </Link>
                 ))}
+
               </div>
             )}
             {nav.slice(2).map((n) => (
