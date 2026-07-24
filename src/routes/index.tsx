@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Phone,
@@ -272,12 +272,12 @@ function About() {
             uncompromising pursuit of quality. We prioritize our customers' aspirations, delivering
             spaces that reflect style, comfort, and functionality.
           </p>
-          <a
-            href="#services"
+          <Link
+            to="/about"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-[color:var(--ink)] px-7 py-3 text-sm font-semibold text-white transition hover:bg-[color:var(--gold)] hover:text-[color:var(--gold-foreground)]"
           >
             Read More <ArrowRight className="h-4 w-4" />
-          </a>
+          </Link>
         </div>
         <div className="grid grid-cols-2 gap-6 border-l border-border pl-6 lg:pl-12">
           {stats.map((s) => (

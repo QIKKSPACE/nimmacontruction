@@ -45,17 +45,21 @@ export function SiteFooter() {
         </div>
         <div>
           <h4 className="font-display text-sm uppercase tracking-widest text-[color:var(--gold)]">
-            Services
+            Company
           </h4>
           <ul className="mt-5 space-y-2 text-sm">
-            {serviceList.slice(0, 7).map((s) => (
+            <li>
+              <Link to="/about" className="hover:text-[color:var(--gold)]">
+                About Us
+              </Link>
+            </li>
+            {serviceList.slice(0, 6).map((s) => (
               <li key={s.slug}>
                 <Link to={s.to} className="hover:text-[color:var(--gold)]">
                   {s.title}
                 </Link>
               </li>
             ))}
-
           </ul>
         </div>
         <div>
