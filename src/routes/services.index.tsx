@@ -7,13 +7,13 @@ import { serviceList } from "@/data/service-list";
 export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
-      { title: "Land Development Services | Vinra Group" },
+      { title: "Land Development Services | Nimma Metro" },
       {
         name: "description",
         content:
           "End-to-end land development — plotted layouts, farmlands, roads, drainage, water, power, landscape and more.",
       },
-      { property: "og:title", content: "Land Development Services | Vinra Group" },
+      { property: "og:title", content: "Land Development Services | Nimma Metro" },
       {
         property: "og:description",
         content: "Explore our full suite of land development capabilities across South India.",
