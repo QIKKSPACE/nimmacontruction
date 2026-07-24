@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Twitter, Youtube, Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { serviceList } from "@/data/service-list";
+import logoAsset from "@/assets/nimma-metro-logo.jpeg.asset.json";
 
 export function SiteFooter() {
   const typology = [
