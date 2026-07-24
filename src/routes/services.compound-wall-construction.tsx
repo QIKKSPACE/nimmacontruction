@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import interior3 from "@/assets/interior-3.jpg";
-import construction2 from "@/assets/construction-2.jpg";
-import projectVss from "@/assets/project-vss.jpg";
+import img1 from "@/assets/svc/wall-1.jpg";
+import img2 from "@/assets/svc/wall-2.jpg";
+import img3 from "@/assets/svc/wall-3.jpg";
 
 const TITLE = "Compound Wall Construction";
 const TAGLINE = "The strong, elegant boundary that defines your community.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="A compound wall is the first thing anyone sees. We build boundary walls that combine structural strength with clean architectural detailing — precast, masonry or RCC — around plots, layouts and estates."
-      heroImg={interior3}
-      gallery={[interior3, construction2, projectVss]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "Precast panel walls (fast track)",
         "Random rubble & block masonry",

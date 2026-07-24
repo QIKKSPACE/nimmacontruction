@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import interior1 from "@/assets/interior-1.jpg";
-import projectValley from "@/assets/project-valley.jpg";
-import projectKr from "@/assets/project-kr.jpg";
+import img1 from "@/assets/svc/landscape-1.jpg";
+import img2 from "@/assets/svc/landscape-2.jpg";
+import img3 from "@/assets/svc/landscape-3.jpg";
 
 const TITLE = "Landscape & Tree Plantation";
 const TAGLINE = "Green cover that turns land into a living, breathing community.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="Great landscapes take years — start right on day one. Our horticulturists plan avenues, parks and buffer greens with the right native species, irrigation and long-term maintenance in mind."
-      heroImg={interior1}
-      gallery={[interior1, projectValley, projectKr]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "Native & flowering avenue trees",
         "Themed parks and play greens",

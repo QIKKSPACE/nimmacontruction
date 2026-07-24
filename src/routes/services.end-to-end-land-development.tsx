@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import projectValley from "@/assets/project-valley.jpg";
-import construction1 from "@/assets/construction-1.jpg";
-import heroVilla from "@/assets/hero-villa.jpg";
+import img1 from "@/assets/svc/endtoend-1.jpg";
+import img2 from "@/assets/svc/endtoend-2.jpg";
+import img3 from "@/assets/svc/endtoend-3.jpg";
 
 const TITLE = "End-to-End Land Development";
 const TAGLINE = "One accountable partner, from raw land to a fully serviced community.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="Combine every capability we offer into a single, turnkey engagement. From acquisition and approvals to infrastructure and handover, we take a raw parcel and deliver a fully serviced, sale-ready community."
-      heroImg={projectValley}
-      gallery={[projectValley, construction1, heroVilla]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "Land sourcing & due diligence",
         "Statutory approvals & liaisoning",

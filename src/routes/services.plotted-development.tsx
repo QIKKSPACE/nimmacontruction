@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import projectValley from "@/assets/project-valley.jpg";
-import projectKr from "@/assets/project-kr.jpg";
-import heroVilla from "@/assets/hero-villa.jpg";
+import img1 from "@/assets/svc/plotted-1.jpg";
+import img2 from "@/assets/svc/plotted-2.jpg";
+import img3 from "@/assets/svc/plotted-3.jpg";
 
 const TITLE = "Plotted Development";
 const TAGLINE = "Master-planned residential plots ready to build your dream on.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="We create thoughtfully master-planned plotted communities with clear titles, approved layouts, and world-class infrastructure — giving you the freedom to design and build your own home on a foundation of trust."
-      heroImg={projectValley}
-      gallery={[projectValley, projectKr, heroVilla]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "DTCP / RERA approved layouts",
         "Clear titles & khata guarantee",

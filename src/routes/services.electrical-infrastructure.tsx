@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import heroVilla from "@/assets/hero-villa.jpg";
-import projectValley from "@/assets/project-valley.jpg";
-import interior2 from "@/assets/interior-2.jpg";
+import img1 from "@/assets/svc/electrical-1.jpg";
+import img2 from "@/assets/svc/electrical-2.jpg";
+import img3 from "@/assets/svc/electrical-3.jpg";
 
 const TITLE = "Electrical Infrastructure";
 const TAGLINE = "Power that is safe, coded and future-ready.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="From HT feeders and transformers to LT distribution, street lighting and smart metering — we deliver end-to-end electrical infrastructure that meets IE Rules and utility standards."
-      heroImg={heroVilla}
-      gallery={[heroVilla, projectValley, interior2]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "HT feeder line & transformer yards",
         "LT distribution panels & cabling",
