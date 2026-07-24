@@ -83,8 +83,8 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a href="mailto:info@vinragroup.com" className="hover:text-[color:var(--gold)]">
-                info@vinragroup.com
+              <a href="mailto:info@nimmametro.com" className="hover:text-[color:var(--gold)]">
+                info@nimmametro.com
               </a>
             </li>
             <li className="text-white/60">
@@ -94,7 +94,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="container-x mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row md:items-center">
-        <div>© {new Date().getFullYear()} Vinra Group. All rights reserved.</div>
+        <div>© {new Date().getFullYear()} Nimma Metro. All rights reserved.</div>
         <div className="flex gap-6">
           <a href="#" className="hover:text-[color:var(--gold)]">Privacy Policy</a>
           <a href="#" className="hover:text-[color:var(--gold)]">Terms & Conditions</a>

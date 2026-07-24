@@ -10,9 +10,9 @@ const TAGLINE = "Weekend farmlands that combine nature, agriculture and long-ter
 export const Route = createFileRoute("/services/farmland-development")({
   head: () => ({
     meta: [
-      { title: `${TITLE} | Vinra Group` },
+      { title: `${TITLE} | Nimma Metro` },
       { name: "description", content: TAGLINE },
-      { property: "og:title", content: `${TITLE} | Vinra Group` },
+      { property: "og:title", content: `${TITLE} | Nimma Metro` },
       { property: "og:description", content: TAGLINE },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -48,8 +48,8 @@ export function ServicePageLayout(props: ServicePageProps) {
               <a href="tel:+918884898765" className="flex items-center gap-2 hover:text-[color:var(--gold)]">
                 <Phone className="h-4 w-4 text-[color:var(--gold)]" /> 888-4898-765
               </a>
-              <a href="mailto:info@vinragroup.com" className="flex items-center gap-2 hover:text-[color:var(--gold)]">
-                <Mail className="h-4 w-4 text-[color:var(--gold)]" /> info@vinragroup.com
+              <a href="mailto:info@nimmametro.com" className="flex items-center gap-2 hover:text-[color:var(--gold)]">
+                <Mail className="h-4 w-4 text-[color:var(--gold)]" /> info@nimmametro.com
               </a>
             </div>
             <Link

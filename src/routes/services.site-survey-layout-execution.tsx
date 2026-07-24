@@ -10,9 +10,9 @@ const TAGLINE = "Precision on the ground — where every millimetre matters.";
 export const Route = createFileRoute("/services/site-survey-layout-execution")({
   head: () => ({
     meta: [
-      { title: `${TITLE} | Vinra Group` },
+      { title: `${TITLE} | Nimma Metro` },
       { name: "description", content: TAGLINE },
-      { property: "og:title", content: `${TITLE} | Vinra Group` },
+      { property: "og:title", content: `${TITLE} | Nimma Metro` },
       { property: "og:description", content: TAGLINE },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

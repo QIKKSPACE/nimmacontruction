@@ -145,7 +145,7 @@ function Logo({ dark = false }: { dark?: boolean }) {
         <span className="font-display text-lg font-bold text-[color:var(--gold)]">V</span>
       </span>
       <span className={`flex flex-col leading-tight ${dark ? "text-white" : "text-foreground"}`}>
-        <span className="font-display text-lg font-bold tracking-wide">VINRA GROUP</span>
+        <span className="font-display text-lg font-bold tracking-wide">NIMMA METRO</span>
         <span className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--gold)]">
           Complete Living Solutions
         </span>
@@ -216,7 +216,7 @@ function Hero() {
     <section className="relative isolate">
       <img
         src={heroVilla}
-        alt="Luxury modern villa by Vinra Group"
+        alt="Luxury modern villa by Nimma Metro"
         width={1920}
         height={1080}
         className="absolute inset-0 h-full w-full object-cover"
@@ -262,12 +262,12 @@ function About() {
     <section id="about" className="py-24">
       <div className="container-x grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
-          <p className="eyebrow">About Vinra Group</p>
+          <p className="eyebrow">About Nimma Metro</p>
           <h2 className="mt-3 font-display text-4xl md:text-5xl">
             A journey of Excellence and Innovation
           </h2>
           <p className="mt-6 text-muted-foreground">
-            With more than 15 years of industry experience, Vinra Group is one of the most trusted
+            With more than 15 years of industry experience, Nimma Metro is one of the most trusted
             builders in Bangalore. Our reputation is founded on trust, transparency, and an
             uncompromising pursuit of quality. We prioritize our customers' aspirations, delivering
             spaces that reflect style, comfort, and functionality.
@@ -404,7 +404,7 @@ function Construction() {
           <p className="eyebrow">Featured Projects</p>
           <h2 className="mt-3 font-display text-4xl text-white md:text-5xl">House Construction</h2>
           <p className="mt-6 text-white/70">
-            Vinra Group is recognized as one of the most trusted construction companies in
+            Nimma Metro is recognized as one of the most trusted construction companies in
             Bangalore. Turnkey construction services starting from ₹ 1,875 per sqft — everything
             from concept to completion under one roof.
           </p>
@@ -480,7 +480,7 @@ function Testimonials() {
           <p className="eyebrow">Testimonials</p>
           <h2 className="mt-3 font-display text-4xl md:text-5xl">What our customers say</h2>
           <p className="mt-6 text-muted-foreground">
-            At Vinra Group, our focus is on you and what you want to achieve. We pride ourselves on
+            At Nimma Metro, our focus is on you and what you want to achieve. We pride ourselves on
             forging strong, lasting relationships, which help us to continue to thrive and develop.
           </p>
         </div>
@@ -591,8 +591,8 @@ function ContactForm() {
             <a href="tel:+918884898765" className="flex items-center gap-3 text-white/85 hover:text-[color:var(--gold)]">
               <Phone className="h-4 w-4 text-[color:var(--gold)]" /> 888-4898-765
             </a>
-            <a href="mailto:info@vinragroup.com" className="flex items-center gap-3 text-white/85 hover:text-[color:var(--gold)]">
-              <Mail className="h-4 w-4 text-[color:var(--gold)]" /> info@vinragroup.com
+            <a href="mailto:info@nimmametro.com" className="flex items-center gap-3 text-white/85 hover:text-[color:var(--gold)]">
+              <Mail className="h-4 w-4 text-[color:var(--gold)]" /> info@nimmametro.com
             </a>
             <div className="flex items-start gap-3 text-white/85">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--gold)]" />
@@ -712,8 +712,8 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a href="mailto:info@vinragroup.com" className="hover:text-[color:var(--gold)]">
-                info@vinragroup.com
+              <a href="mailto:info@nimmametro.com" className="hover:text-[color:var(--gold)]">
+                info@nimmametro.com
               </a>
             </li>
             <li className="text-white/60">
@@ -735,7 +735,7 @@ function Footer() {
         </div>
       </div>
       <div className="container-x mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row md:items-center">
-        <div>© {new Date().getFullYear()} Vinra Group. All rights reserved.</div>
+        <div>© {new Date().getFullYear()} Nimma Metro. All rights reserved.</div>
         <div className="flex gap-6">
           <a href="#" className="hover:text-[color:var(--gold)]">Privacy Policy</a>
           <a href="#" className="hover:text-[color:var(--gold)]">Terms & Conditions</a>
