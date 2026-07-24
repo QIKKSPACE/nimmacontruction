@@ -6,7 +6,7 @@ import logoAsset from "@/assets/nimma-metro-logo.jpeg.asset.json";
 
 const nav = [
   { label: "Home", to: "/", hash: "home" as const },
-  { label: "About Us", to: "/", hash: "about" as const },
+  { label: "About Us", to: "/about" as const },
   { label: "Projects", to: "/", hash: "projects" as const },
   { label: "Cost Calculator", to: "/", hash: "calculator" as const },
   { label: "Blogs", to: "/", hash: "blogs" as const },

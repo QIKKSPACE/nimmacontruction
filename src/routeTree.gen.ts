@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesWaterPipelineNetworksRouteImport } from './routes/services.water-pipeline-networks'
@@ -23,6 +24,11 @@ import { Route as ServicesEndToEndLandDevelopmentRouteImport } from './routes/se
 import { Route as ServicesElectricalInfrastructureRouteImport } from './routes/services.electrical-infrastructure'
 import { Route as ServicesCompoundWallConstructionRouteImport } from './routes/services.compound-wall-construction'
 
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -101,6 +107,7 @@ const ServicesCompoundWallConstructionRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/services/compound-wall-construction': typeof ServicesCompoundWallConstructionRoute
   '/services/electrical-infrastructure': typeof ServicesElectricalInfrastructureRoute
   '/services/end-to-end-land-development': typeof ServicesEndToEndLandDevelopmentRoute
@@ -116,6 +123,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/services/compound-wall-construction': typeof ServicesCompoundWallConstructionRoute
   '/services/electrical-infrastructure': typeof ServicesElectricalInfrastructureRoute
   '/services/end-to-end-land-development': typeof ServicesEndToEndLandDevelopmentRoute
@@ -132,6 +140,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/services/compound-wall-construction': typeof ServicesCompoundWallConstructionRoute
   '/services/electrical-infrastructure': typeof ServicesElectricalInfrastructureRoute
   '/services/end-to-end-land-development': typeof ServicesEndToEndLandDevelopmentRoute
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/services/compound-wall-construction'
     | '/services/electrical-infrastructure'
     | '/services/end-to-end-land-development'
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/services/compound-wall-construction'
     | '/services/electrical-infrastructure'
     | '/services/end-to-end-land-development'
@@ -179,6 +190,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/services/compound-wall-construction'
     | '/services/electrical-infrastructure'
     | '/services/end-to-end-land-development'
@@ -195,6 +207,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ServicesCompoundWallConstructionRoute: typeof ServicesCompoundWallConstructionRoute
   ServicesElectricalInfrastructureRoute: typeof ServicesElectricalInfrastructureRoute
   ServicesEndToEndLandDevelopmentRoute: typeof ServicesEndToEndLandDevelopmentRoute
@@ -211,6 +224,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -307,6 +327,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ServicesCompoundWallConstructionRoute: ServicesCompoundWallConstructionRoute,
   ServicesElectricalInfrastructureRoute: ServicesElectricalInfrastructureRoute,
   ServicesEndToEndLandDevelopmentRoute: ServicesEndToEndLandDevelopmentRoute,
