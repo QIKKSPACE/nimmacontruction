@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { serviceList } from "@/data/service-list";
+import logoAsset from "@/assets/nimma-metro-logo.jpeg.asset.json";
 
 const nav = [
   { label: "Home", to: "/", hash: "home" as const },
@@ -14,14 +15,11 @@ const nav = [
 function Logo() {
   return (
     <Link to="/" className="flex items-center gap-2">
-      <span
-        className="flex h-10 w-10 items-center justify-center rounded-full border-2"
-        style={{ borderColor: "var(--gold)" }}
-      >
-        <span className="font-display text-lg font-bold text-[color:var(--gold)]">V</span>
+      <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white">
+        <img src={logoAsset.url} alt="Nimma Metro" className="h-full w-full object-contain" />
       </span>
       <span className="flex flex-col leading-tight text-white">
-        <span className="font-display text-lg font-bold tracking-wide">VINRA GROUP</span>
+        <span className="font-display text-lg font-bold tracking-wide">NIMMA METRO</span>
         <span className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--gold)]">
           Complete Living Solutions
         </span>
