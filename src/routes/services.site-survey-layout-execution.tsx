@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import construction2 from "@/assets/construction-2.jpg";
-import projectKr from "@/assets/project-kr.jpg";
-import projectValley from "@/assets/project-valley.jpg";
+import img1 from "@/assets/svc/survey-1.jpg";
+import img2 from "@/assets/svc/survey-2.jpg";
+import img3 from "@/assets/svc/survey-3.jpg";
 
 const TITLE = "Site Survey & Layout Execution";
 const TAGLINE = "Precision on the ground — where every millimetre matters.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="Modern survey instruments, meticulous documentation and disciplined execution. We translate approved drawings into perfectly marked layouts on site so construction begins on solid, coordinated data."
-      heroImg={construction2}
-      gallery={[construction2, projectKr, projectValley]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "DGPS & Total Station surveys",
         "Contour & topographical mapping",

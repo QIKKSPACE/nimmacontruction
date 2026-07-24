@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import construction2 from "@/assets/construction-2.jpg";
-import construction1 from "@/assets/construction-1.jpg";
-import projectKr from "@/assets/project-kr.jpg";
+import img1 from "@/assets/svc/roads-1.jpg";
+import img2 from "@/assets/svc/roads-2.jpg";
+import img3 from "@/assets/svc/roads-3.jpg";
 
 const TITLE = "Internal Roads";
 const TAGLINE = "Durable, well-engineered roads that shape the everyday experience.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="From granular sub-base to the final wearing coat, we build internal roads that last decades — engineered for drainage, traffic loads and the character of the community they serve."
-      heroImg={construction2}
-      gallery={[construction2, construction1, projectKr]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "WMM / GSB sub-base construction",
         "Bituminous & concrete carriageways",

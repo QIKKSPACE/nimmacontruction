@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import construction1 from "@/assets/construction-1.jpg";
-import construction2 from "@/assets/construction-2.jpg";
-import construction3 from "@/assets/construction-3.jpg";
+import img1 from "@/assets/svc/leveling-1.jpg";
+import img2 from "@/assets/svc/leveling-2.jpg";
+import img3 from "@/assets/svc/leveling-3.jpg";
 
 const TITLE = "Land Leveling & Site Preparation";
 const TAGLINE = "The invisible groundwork that makes great projects possible.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="Every successful development starts below the surface. Our teams handle contour analysis, cut-and-fill, clearing, grading and compaction to deliver a stable, buildable canvas — on time and to spec."
-      heroImg={construction1}
-      gallery={[construction1, construction2, construction3]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "Topographic & contour surveys",
         "Vegetation clearance & de-rooting",

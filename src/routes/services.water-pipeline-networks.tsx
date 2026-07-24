@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import projectKr from "@/assets/project-kr.jpg";
-import projectVss from "@/assets/project-vss.jpg";
-import construction2 from "@/assets/construction-2.jpg";
+import img1 from "@/assets/svc/water-1.jpg";
+import img2 from "@/assets/svc/water-2.jpg";
+import img3 from "@/assets/svc/water-3.jpg";
 
 const TITLE = "Water Pipeline Networks";
 const TAGLINE = "Reliable pressurised water on tap, to every plot and every home.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="We design and lay complete potable and non-potable water networks — pump houses, overhead tanks, ring mains and service connections — engineered for pressure, purity and zero leakage."
-      heroImg={projectKr}
-      gallery={[projectKr, projectVss, construction2]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "HDPE / DI ring main networks",
         "Overhead tanks & sump systems",

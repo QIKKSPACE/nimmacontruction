@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import construction3 from "@/assets/construction-3.jpg";
-import construction1 from "@/assets/construction-1.jpg";
-import projectValley from "@/assets/project-valley.jpg";
+import img1 from "@/assets/svc/drainage-1.jpg";
+import img2 from "@/assets/svc/drainage-2.jpg";
+import img3 from "@/assets/svc/drainage-3.jpg";
 
 const TITLE = "Storm Water Drainage";
 const TAGLINE = "Engineered drainage that keeps communities dry through the heaviest monsoon.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="Water is the number one enemy of urban infrastructure. We design and build storm water systems — from catchment analysis to recharge pits — that protect roads, homes and the water table alike."
-      heroImg={construction3}
-      gallery={[construction3, construction1, projectValley]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "Hydrological catchment analysis",
         "RCC / precast drain channels",

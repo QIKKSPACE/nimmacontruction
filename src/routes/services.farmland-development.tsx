@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import projectVss from "@/assets/project-vss.jpg";
-import projectValley from "@/assets/project-valley.jpg";
-import construction3 from "@/assets/construction-3.jpg";
+import img1 from "@/assets/svc/farmland-1.jpg";
+import img2 from "@/assets/svc/farmland-2.jpg";
+import img3 from "@/assets/svc/farmland-3.jpg";
 
 const TITLE = "Farmland Development";
 const TAGLINE = "Weekend farmlands that combine nature, agriculture and long-term value.";
@@ -28,8 +28,8 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="Own a piece of the countryside without the hassle. Our managed farmland communities blend agroforestry, organic farming and gated infrastructure — a serene escape and a smart appreciating asset."
-      heroImg={projectVss}
-      gallery={[projectVss, projectValley, construction3]}
+      heroImg={img1}
+      gallery={[img1, img2, img3]}
       features={[
         "Managed agroforestry & fruit orchards",
         "Drip-irrigated plantations",
