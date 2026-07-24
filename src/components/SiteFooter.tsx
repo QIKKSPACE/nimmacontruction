@@ -17,14 +17,11 @@ export function SiteFooter() {
       <div className="container-x grid gap-12 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link to="/" className="flex items-center gap-2">
-            <span
-              className="flex h-10 w-10 items-center justify-center rounded-full border-2"
-              style={{ borderColor: "var(--gold)" }}
-            >
-              <span className="font-display text-lg font-bold text-[color:var(--gold)]">V</span>
+            <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white">
+              <img src={logoAsset.url} alt="Nimma Metro" className="h-full w-full object-contain" />
             </span>
             <span className="flex flex-col leading-tight text-white">
-              <span className="font-display text-lg font-bold tracking-wide">VINRA GROUP</span>
+              <span className="font-display text-lg font-bold tracking-wide">NIMMA METRO</span>
               <span className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--gold)]">
                 Complete Living Solutions
               </span>
