@@ -120,9 +120,6 @@ export function ServicePageLayout(props: ServicePageProps) {
               <p className="eyebrow">Explore more</p>
               <h2 className="mt-3 font-display text-3xl md:text-4xl">Other services</h2>
             </div>
-            <Link to="/services" className="hidden text-sm font-semibold text-[color:var(--gold)] md:inline-flex">
-              View all →
-            </Link>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {others.map((o) => (

@@ -9,93 +9,48 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicesIndexRouteImport } from './routes/services.index'
-import { Route as ServicesWaterPipelineNetworksRouteImport } from './routes/services.water-pipeline-networks'
-import { Route as ServicesStormWaterDrainageRouteImport } from './routes/services.storm-water-drainage'
-import { Route as ServicesSiteSurveyLayoutExecutionRouteImport } from './routes/services.site-survey-layout-execution'
-import { Route as ServicesPlottedDevelopmentRouteImport } from './routes/services.plotted-development'
-import { Route as ServicesLandscapeTreePlantationRouteImport } from './routes/services.landscape-tree-plantation'
-import { Route as ServicesLandLevelingSitePreparationRouteImport } from './routes/services.land-leveling-site-preparation'
-import { Route as ServicesInternalRoadsRouteImport } from './routes/services.internal-roads'
-import { Route as ServicesFarmlandDevelopmentRouteImport } from './routes/services.farmland-development'
-import { Route as ServicesEndToEndLandDevelopmentRouteImport } from './routes/services.end-to-end-land-development'
-import { Route as ServicesElectricalInfrastructureRouteImport } from './routes/services.electrical-infrastructure'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ProjectsIdRouteImport } from './routes/projects.$id'
+import { Route as ProjectsFarmlandDevelopmentRouteImport } from './routes/projects.farmland-development'
+import { Route as ProjectsPlottedDevelopmentRouteImport } from './routes/projects.plotted-development'
 import { Route as ServicesCompoundWallConstructionRouteImport } from './routes/services.compound-wall-construction'
+import { Route as ServicesElectricalInfrastructureRouteImport } from './routes/services.electrical-infrastructure'
+import { Route as ServicesEndToEndLandDevelopmentRouteImport } from './routes/services.end-to-end-land-development'
+import { Route as ServicesFarmlandDevelopmentRouteImport } from './routes/services.farmland-development'
+import { Route as ServicesInternalRoadsRouteImport } from './routes/services.internal-roads'
+import { Route as ServicesLandLevelingSitePreparationRouteImport } from './routes/services.land-leveling-site-preparation'
+import { Route as ServicesLandscapeTreePlantationRouteImport } from './routes/services.landscape-tree-plantation'
+import { Route as ServicesPlottedDevelopmentRouteImport } from './routes/services.plotted-development'
+import { Route as ServicesSiteSurveyLayoutExecutionRouteImport } from './routes/services.site-survey-layout-execution'
+import { Route as ServicesStormWaterDrainageRouteImport } from './routes/services.storm-water-drainage'
+import { Route as ServicesWaterPipelineNetworksRouteImport } from './routes/services.water-pipeline-networks'
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesIndexRoute = ServicesIndexRouteImport.update({
-  id: '/services/',
-  path: '/services/',
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesWaterPipelineNetworksRoute =
-  ServicesWaterPipelineNetworksRouteImport.update({
-    id: '/services/water-pipeline-networks',
-    path: '/services/water-pipeline-networks',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesStormWaterDrainageRoute =
-  ServicesStormWaterDrainageRouteImport.update({
-    id: '/services/storm-water-drainage',
-    path: '/services/storm-water-drainage',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesSiteSurveyLayoutExecutionRoute =
-  ServicesSiteSurveyLayoutExecutionRouteImport.update({
-    id: '/services/site-survey-layout-execution',
-    path: '/services/site-survey-layout-execution',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesPlottedDevelopmentRoute =
-  ServicesPlottedDevelopmentRouteImport.update({
-    id: '/services/plotted-development',
-    path: '/services/plotted-development',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesLandscapeTreePlantationRoute =
-  ServicesLandscapeTreePlantationRouteImport.update({
-    id: '/services/landscape-tree-plantation',
-    path: '/services/landscape-tree-plantation',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesLandLevelingSitePreparationRoute =
-  ServicesLandLevelingSitePreparationRouteImport.update({
-    id: '/services/land-leveling-site-preparation',
-    path: '/services/land-leveling-site-preparation',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesInternalRoadsRoute = ServicesInternalRoadsRouteImport.update({
-  id: '/services/internal-roads',
-  path: '/services/internal-roads',
+const ProjectsIdRoute = ProjectsIdRouteImport.update({
+  id: '/projects/$id',
+  path: '/projects/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesFarmlandDevelopmentRoute =
-  ServicesFarmlandDevelopmentRouteImport.update({
-    id: '/services/farmland-development',
-    path: '/services/farmland-development',
+const ProjectsFarmlandDevelopmentRoute =
+  ProjectsFarmlandDevelopmentRouteImport.update({
+    id: '/projects/farmland-development',
+    path: '/projects/farmland-development',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ServicesEndToEndLandDevelopmentRoute =
-  ServicesEndToEndLandDevelopmentRouteImport.update({
-    id: '/services/end-to-end-land-development',
-    path: '/services/end-to-end-land-development',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesElectricalInfrastructureRoute =
-  ServicesElectricalInfrastructureRouteImport.update({
-    id: '/services/electrical-infrastructure',
-    path: '/services/electrical-infrastructure',
+const ProjectsPlottedDevelopmentRoute =
+  ProjectsPlottedDevelopmentRouteImport.update({
+    id: '/projects/plotted-development',
+    path: '/projects/plotted-development',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ServicesCompoundWallConstructionRoute =
@@ -104,10 +59,72 @@ const ServicesCompoundWallConstructionRoute =
     path: '/services/compound-wall-construction',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ServicesElectricalInfrastructureRoute =
+  ServicesElectricalInfrastructureRouteImport.update({
+    id: '/services/electrical-infrastructure',
+    path: '/services/electrical-infrastructure',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesEndToEndLandDevelopmentRoute =
+  ServicesEndToEndLandDevelopmentRouteImport.update({
+    id: '/services/end-to-end-land-development',
+    path: '/services/end-to-end-land-development',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesFarmlandDevelopmentRoute =
+  ServicesFarmlandDevelopmentRouteImport.update({
+    id: '/services/farmland-development',
+    path: '/services/farmland-development',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesInternalRoadsRoute = ServicesInternalRoadsRouteImport.update({
+  id: '/services/internal-roads',
+  path: '/services/internal-roads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLandLevelingSitePreparationRoute =
+  ServicesLandLevelingSitePreparationRouteImport.update({
+    id: '/services/land-leveling-site-preparation',
+    path: '/services/land-leveling-site-preparation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesLandscapeTreePlantationRoute =
+  ServicesLandscapeTreePlantationRouteImport.update({
+    id: '/services/landscape-tree-plantation',
+    path: '/services/landscape-tree-plantation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesPlottedDevelopmentRoute =
+  ServicesPlottedDevelopmentRouteImport.update({
+    id: '/services/plotted-development',
+    path: '/services/plotted-development',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesSiteSurveyLayoutExecutionRoute =
+  ServicesSiteSurveyLayoutExecutionRouteImport.update({
+    id: '/services/site-survey-layout-execution',
+    path: '/services/site-survey-layout-execution',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesStormWaterDrainageRoute =
+  ServicesStormWaterDrainageRouteImport.update({
+    id: '/services/storm-water-drainage',
+    path: '/services/storm-water-drainage',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesWaterPipelineNetworksRoute =
+  ServicesWaterPipelineNetworksRouteImport.update({
+    id: '/services/water-pipeline-networks',
+    path: '/services/water-pipeline-networks',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/projects/farmland-development': typeof ProjectsFarmlandDevelopmentRoute
+  '/projects/plotted-development': typeof ProjectsPlottedDevelopmentRoute
   '/services/compound-wall-construction': typeof ServicesCompoundWallConstructionRoute
   '/services/electrical-infrastructure': typeof ServicesElectricalInfrastructureRoute
   '/services/end-to-end-land-development': typeof ServicesEndToEndLandDevelopmentRoute
@@ -119,11 +136,13 @@ export interface FileRoutesByFullPath {
   '/services/site-survey-layout-execution': typeof ServicesSiteSurveyLayoutExecutionRoute
   '/services/storm-water-drainage': typeof ServicesStormWaterDrainageRoute
   '/services/water-pipeline-networks': typeof ServicesWaterPipelineNetworksRoute
-  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/projects/farmland-development': typeof ProjectsFarmlandDevelopmentRoute
+  '/projects/plotted-development': typeof ProjectsPlottedDevelopmentRoute
   '/services/compound-wall-construction': typeof ServicesCompoundWallConstructionRoute
   '/services/electrical-infrastructure': typeof ServicesElectricalInfrastructureRoute
   '/services/end-to-end-land-development': typeof ServicesEndToEndLandDevelopmentRoute
@@ -135,12 +154,14 @@ export interface FileRoutesByTo {
   '/services/site-survey-layout-execution': typeof ServicesSiteSurveyLayoutExecutionRoute
   '/services/storm-water-drainage': typeof ServicesStormWaterDrainageRoute
   '/services/water-pipeline-networks': typeof ServicesWaterPipelineNetworksRoute
-  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/projects/farmland-development': typeof ProjectsFarmlandDevelopmentRoute
+  '/projects/plotted-development': typeof ProjectsPlottedDevelopmentRoute
   '/services/compound-wall-construction': typeof ServicesCompoundWallConstructionRoute
   '/services/electrical-infrastructure': typeof ServicesElectricalInfrastructureRoute
   '/services/end-to-end-land-development': typeof ServicesEndToEndLandDevelopmentRoute
@@ -152,13 +173,15 @@ export interface FileRoutesById {
   '/services/site-survey-layout-execution': typeof ServicesSiteSurveyLayoutExecutionRoute
   '/services/storm-water-drainage': typeof ServicesStormWaterDrainageRoute
   '/services/water-pipeline-networks': typeof ServicesWaterPipelineNetworksRoute
-  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/projects/$id'
+    | '/projects/farmland-development'
+    | '/projects/plotted-development'
     | '/services/compound-wall-construction'
     | '/services/electrical-infrastructure'
     | '/services/end-to-end-land-development'
@@ -170,11 +193,13 @@ export interface FileRouteTypes {
     | '/services/site-survey-layout-execution'
     | '/services/storm-water-drainage'
     | '/services/water-pipeline-networks'
-    | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/projects/$id'
+    | '/projects/farmland-development'
+    | '/projects/plotted-development'
     | '/services/compound-wall-construction'
     | '/services/electrical-infrastructure'
     | '/services/end-to-end-land-development'
@@ -186,11 +211,13 @@ export interface FileRouteTypes {
     | '/services/site-survey-layout-execution'
     | '/services/storm-water-drainage'
     | '/services/water-pipeline-networks'
-    | '/services'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/projects/$id'
+    | '/projects/farmland-development'
+    | '/projects/plotted-development'
     | '/services/compound-wall-construction'
     | '/services/electrical-infrastructure'
     | '/services/end-to-end-land-development'
@@ -202,12 +229,14 @@ export interface FileRouteTypes {
     | '/services/site-survey-layout-execution'
     | '/services/storm-water-drainage'
     | '/services/water-pipeline-networks'
-    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ProjectsIdRoute: typeof ProjectsIdRoute
+  ProjectsFarmlandDevelopmentRoute: typeof ProjectsFarmlandDevelopmentRoute
+  ProjectsPlottedDevelopmentRoute: typeof ProjectsPlottedDevelopmentRoute
   ServicesCompoundWallConstructionRoute: typeof ServicesCompoundWallConstructionRoute
   ServicesElectricalInfrastructureRoute: typeof ServicesElectricalInfrastructureRoute
   ServicesEndToEndLandDevelopmentRoute: typeof ServicesEndToEndLandDevelopmentRoute
@@ -219,18 +248,10 @@ export interface RootRouteChildren {
   ServicesSiteSurveyLayoutExecutionRoute: typeof ServicesSiteSurveyLayoutExecutionRoute
   ServicesStormWaterDrainageRoute: typeof ServicesStormWaterDrainageRoute
   ServicesWaterPipelineNetworksRoute: typeof ServicesWaterPipelineNetworksRoute
-  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -238,81 +259,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/': {
-      id: '/services/'
-      path: '/services'
-      fullPath: '/services/'
-      preLoaderRoute: typeof ServicesIndexRouteImport
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/water-pipeline-networks': {
-      id: '/services/water-pipeline-networks'
-      path: '/services/water-pipeline-networks'
-      fullPath: '/services/water-pipeline-networks'
-      preLoaderRoute: typeof ServicesWaterPipelineNetworksRouteImport
+    '/projects/$id': {
+      id: '/projects/$id'
+      path: '/projects/$id'
+      fullPath: '/projects/$id'
+      preLoaderRoute: typeof ProjectsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/storm-water-drainage': {
-      id: '/services/storm-water-drainage'
-      path: '/services/storm-water-drainage'
-      fullPath: '/services/storm-water-drainage'
-      preLoaderRoute: typeof ServicesStormWaterDrainageRouteImport
+    '/projects/farmland-development': {
+      id: '/projects/farmland-development'
+      path: '/projects/farmland-development'
+      fullPath: '/projects/farmland-development'
+      preLoaderRoute: typeof ProjectsFarmlandDevelopmentRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/site-survey-layout-execution': {
-      id: '/services/site-survey-layout-execution'
-      path: '/services/site-survey-layout-execution'
-      fullPath: '/services/site-survey-layout-execution'
-      preLoaderRoute: typeof ServicesSiteSurveyLayoutExecutionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/plotted-development': {
-      id: '/services/plotted-development'
-      path: '/services/plotted-development'
-      fullPath: '/services/plotted-development'
-      preLoaderRoute: typeof ServicesPlottedDevelopmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/landscape-tree-plantation': {
-      id: '/services/landscape-tree-plantation'
-      path: '/services/landscape-tree-plantation'
-      fullPath: '/services/landscape-tree-plantation'
-      preLoaderRoute: typeof ServicesLandscapeTreePlantationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/land-leveling-site-preparation': {
-      id: '/services/land-leveling-site-preparation'
-      path: '/services/land-leveling-site-preparation'
-      fullPath: '/services/land-leveling-site-preparation'
-      preLoaderRoute: typeof ServicesLandLevelingSitePreparationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/internal-roads': {
-      id: '/services/internal-roads'
-      path: '/services/internal-roads'
-      fullPath: '/services/internal-roads'
-      preLoaderRoute: typeof ServicesInternalRoadsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/farmland-development': {
-      id: '/services/farmland-development'
-      path: '/services/farmland-development'
-      fullPath: '/services/farmland-development'
-      preLoaderRoute: typeof ServicesFarmlandDevelopmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/end-to-end-land-development': {
-      id: '/services/end-to-end-land-development'
-      path: '/services/end-to-end-land-development'
-      fullPath: '/services/end-to-end-land-development'
-      preLoaderRoute: typeof ServicesEndToEndLandDevelopmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/electrical-infrastructure': {
-      id: '/services/electrical-infrastructure'
-      path: '/services/electrical-infrastructure'
-      fullPath: '/services/electrical-infrastructure'
-      preLoaderRoute: typeof ServicesElectricalInfrastructureRouteImport
+    '/projects/plotted-development': {
+      id: '/projects/plotted-development'
+      path: '/projects/plotted-development'
+      fullPath: '/projects/plotted-development'
+      preLoaderRoute: typeof ProjectsPlottedDevelopmentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/compound-wall-construction': {
@@ -322,12 +294,85 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCompoundWallConstructionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/electrical-infrastructure': {
+      id: '/services/electrical-infrastructure'
+      path: '/services/electrical-infrastructure'
+      fullPath: '/services/electrical-infrastructure'
+      preLoaderRoute: typeof ServicesElectricalInfrastructureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/end-to-end-land-development': {
+      id: '/services/end-to-end-land-development'
+      path: '/services/end-to-end-land-development'
+      fullPath: '/services/end-to-end-land-development'
+      preLoaderRoute: typeof ServicesEndToEndLandDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/farmland-development': {
+      id: '/services/farmland-development'
+      path: '/services/farmland-development'
+      fullPath: '/services/farmland-development'
+      preLoaderRoute: typeof ServicesFarmlandDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/internal-roads': {
+      id: '/services/internal-roads'
+      path: '/services/internal-roads'
+      fullPath: '/services/internal-roads'
+      preLoaderRoute: typeof ServicesInternalRoadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/land-leveling-site-preparation': {
+      id: '/services/land-leveling-site-preparation'
+      path: '/services/land-leveling-site-preparation'
+      fullPath: '/services/land-leveling-site-preparation'
+      preLoaderRoute: typeof ServicesLandLevelingSitePreparationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/landscape-tree-plantation': {
+      id: '/services/landscape-tree-plantation'
+      path: '/services/landscape-tree-plantation'
+      fullPath: '/services/landscape-tree-plantation'
+      preLoaderRoute: typeof ServicesLandscapeTreePlantationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/plotted-development': {
+      id: '/services/plotted-development'
+      path: '/services/plotted-development'
+      fullPath: '/services/plotted-development'
+      preLoaderRoute: typeof ServicesPlottedDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/site-survey-layout-execution': {
+      id: '/services/site-survey-layout-execution'
+      path: '/services/site-survey-layout-execution'
+      fullPath: '/services/site-survey-layout-execution'
+      preLoaderRoute: typeof ServicesSiteSurveyLayoutExecutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/storm-water-drainage': {
+      id: '/services/storm-water-drainage'
+      path: '/services/storm-water-drainage'
+      fullPath: '/services/storm-water-drainage'
+      preLoaderRoute: typeof ServicesStormWaterDrainageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/water-pipeline-networks': {
+      id: '/services/water-pipeline-networks'
+      path: '/services/water-pipeline-networks'
+      fullPath: '/services/water-pipeline-networks'
+      preLoaderRoute: typeof ServicesWaterPipelineNetworksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ProjectsIdRoute: ProjectsIdRoute,
+  ProjectsFarmlandDevelopmentRoute: ProjectsFarmlandDevelopmentRoute,
+  ProjectsPlottedDevelopmentRoute: ProjectsPlottedDevelopmentRoute,
   ServicesCompoundWallConstructionRoute: ServicesCompoundWallConstructionRoute,
   ServicesElectricalInfrastructureRoute: ServicesElectricalInfrastructureRoute,
   ServicesEndToEndLandDevelopmentRoute: ServicesEndToEndLandDevelopmentRoute,
@@ -341,7 +386,6 @@ const rootRouteChildren: RootRouteChildren = {
     ServicesSiteSurveyLayoutExecutionRoute,
   ServicesStormWaterDrainageRoute: ServicesStormWaterDrainageRoute,
   ServicesWaterPipelineNetworksRoute: ServicesWaterPipelineNetworksRoute,
-  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

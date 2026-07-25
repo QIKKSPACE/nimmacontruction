@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import logoAsset from "@/assets/nimma-metro-logo.jpeg.asset.json";
 import heroVilla from "@/assets/hero-villa.jpg";
 import projectValley from "@/assets/project-valley.jpg";
 import projectVss from "@/assets/project-vss.jpg";
@@ -36,8 +37,6 @@ const nav = [
   { label: "About Us", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
-  { label: "Cost Calculator", href: "#calculator" },
-  { label: "Blogs", href: "#blogs" },
 ];
 
 const services = [
@@ -138,11 +137,8 @@ function Home() {
 function Logo({ dark = false }: { dark?: boolean }) {
   return (
     <a href="#home" className="flex items-center gap-2">
-      <span
-        className="flex h-10 w-10 items-center justify-center rounded-full border-2"
-        style={{ borderColor: "var(--gold)" }}
-      >
-        <span className="font-display text-lg font-bold text-[color:var(--gold)]">V</span>
+      <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white">
+        <img src={logoAsset.url} alt="Nimma Metro" className="h-full w-full object-contain" />
       </span>
       <span className={`flex flex-col leading-tight ${dark ? "text-white" : "text-foreground"}`}>
         <span className="font-display text-lg font-bold tracking-wide">NIMMA METRO</span>
