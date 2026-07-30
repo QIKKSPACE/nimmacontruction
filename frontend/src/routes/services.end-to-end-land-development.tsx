@@ -10,9 +10,9 @@ const TAGLINE = "One accountable partner, from raw land to a fully serviced comm
 export const Route = createFileRoute("/services/end-to-end-land-development")({
   head: () => ({
     meta: [
-      { title: `${TITLE} | Nimma Metro` },
+      { title: `${TITLE} | Nimmametro Constructions` },
       { name: "description", content: TAGLINE },
-      { property: "og:title", content: `${TITLE} | Nimma Metro` },
+      { property: "og:title", content: `${TITLE} | Nimmametro Constructions` },
       { property: "og:description", content: TAGLINE },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

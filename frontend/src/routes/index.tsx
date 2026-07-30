@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Phone,
   Mail,
@@ -13,11 +13,21 @@ import {
   ArrowRight,
   Menu,
   X,
+  Globe,
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { socialLinks } from "@/data/social-links";
+import { fetchAllProjects, type ProjectItem } from "@/data/projects-data";
+import { Loader2 } from "lucide-react";
 import logoAsset from "@/assets/nimma-metro-logo.jpeg.asset.json";
-import heroVilla from "@/assets/hero-villa.jpg";
+import heroPlottedDev from "@/assets/hero-plotted-dev.jpg";
+import servicePlotted from "@/assets/service-plotted.jpg";
+import serviceFarmland from "@/assets/service-farmland.jpg";
+import serviceApprovals from "@/assets/service-approvals.jpg";
+import serviceSales from "@/assets/service-sales.jpg";
+import serviceTurnkey from "@/assets/service-turnkey.jpg";
+import serviceMarketing from "@/assets/service-marketing.jpg";
 import projectValley from "@/assets/project-valley.jpg";
 import projectVss from "@/assets/project-vss.jpg";
 import projectKr from "@/assets/project-kr.jpg";
@@ -40,12 +50,12 @@ const nav = [
 ];
 
 const services = [
-  { title: "Real Estate Development", img: projectValley },
-  { title: "Turnkey Construction", img: construction1 },
-  { title: "Interior Design", img: interior1 },
-  { title: "Sales & Marketing", img: projectVss },
-  { title: "Investment Advisory", img: projectKr },
-  { title: "Natural Raw Commodities", img: construction3 },
+  { title: "Plotted developments", img: servicePlotted },
+  { title: "Farmland developments", img: serviceFarmland },
+  { title: "Layout Approvals", img: serviceApprovals },
+  { title: "Layout Sales & Marketing Services", img: serviceSales },
+  { title: "Turnkey Constructions", img: serviceTurnkey },
+  { title: "Project Marketing & Digital Solutions", img: serviceMarketing },
 ];
 
 const realEstate = [
@@ -53,8 +63,6 @@ const realEstate = [
     name: "The Valley",
     img: projectValley,
     type: "Villa Plots",
-    price: "15 Lacs",
-    units: "474",
     location: "Penukonda",
     sub: "90 mins from Bangalore",
   },
@@ -62,8 +70,6 @@ const realEstate = [
     name: "VSS Enclave",
     img: projectVss,
     type: "2 & 3 BHK Apartments",
-    price: "65L",
-    units: "44",
     location: "Yelahanka",
     sub: "Airport Road, Bangalore",
   },
@@ -71,8 +77,6 @@ const realEstate = [
     name: "KR Infinity",
     img: projectKr,
     type: "2 BHK Apartments",
-    price: "50 Lacs",
-    units: "180",
     location: "Devanahalli",
     sub: "Bangalore",
   },
@@ -85,14 +89,6 @@ const interiors = [
   { img: interior3, name: "Marathalli", city: "Bengaluru" },
 ];
 
-const awards = [
-  "Business Standard",
-  "ANI News",
-  "The Tribune",
-  "The Print",
-  "The Week",
-  "British Columbia Times",
-];
 
 const blogs = [
   {
@@ -121,12 +117,7 @@ function Home() {
       <Hero />
       <About />
       <Services />
-      <RealEstate />
-      <Construction />
-      <Interiors />
-      <Testimonials />
-      <Media />
-      <Blogs />
+      <LatestProjects />
       <ContactForm />
       <SiteFooter />
     </div>
@@ -136,15 +127,12 @@ function Home() {
 
 function Logo({ dark = false }: { dark?: boolean }) {
   return (
-    <a href="#home" className="flex items-center gap-2">
-      <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white">
-        <img src={logoAsset.url} alt="Nimma Metro" className="h-full w-full object-contain" />
+    <a href="#home" className="flex items-center gap-3">
+      <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-white/20">
+        <img src={logoAsset.url} alt="Nimmametro Constructions" className="h-full w-full object-contain" />
       </span>
-      <span className={`flex flex-col leading-tight ${dark ? "text-white" : "text-foreground"}`}>
-        <span className="font-display text-lg font-bold tracking-wide">NIMMA METRO</span>
-        <span className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--gold)]">
-          Complete Living Solutions
-        </span>
+      <span className={`font-display text-lg font-bold tracking-wider ${dark ? "text-white" : "text-foreground"}`}>
+        Nimmametro Constructions
       </span>
     </a>
   );
@@ -211,36 +199,33 @@ function Hero() {
   return (
     <section className="relative isolate">
       <img
-        src={heroVilla}
-        alt="Luxury modern villa by Nimma Metro"
+        src={heroPlottedDev}
+        alt="Transforming Land into Landmarks by Nimmametro Constructions"
         width={1920}
         height={1080}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover object-center"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-      <div className="container-x relative flex min-h-[78vh] flex-col justify-center py-24 text-white">
-        <h1 className="max-w-3xl font-display text-5xl leading-[1.05] md:text-7xl">
-          Complete
-          <br />
-          Living Solutions
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/30" />
+      <div className="container-x relative flex min-h-[82vh] flex-col justify-center py-24 text-white">
+        <h1 className="max-w-4xl font-display text-4xl leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl">
+          Transforming Land into Landmarks
         </h1>
-        <p className="mt-6 max-w-xl text-base text-white/85 md:text-lg">
-          Being the best builders in Bangalore, we create custom homes, stunning interiors, and
-          legendary real estate projects with perfection.
+        <p className="mt-6 max-w-2xl text-base text-white/85 sm:text-lg md:text-xl leading-relaxed">
+          Building Karnataka&apos;s future through premium plotted developments, residential layouts, and sustainable infrastructure.
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <a
-            href="#projects"
-            className="inline-flex items-center gap-2 rounded-full bg-[color:var(--gold)] px-7 py-3 text-sm font-semibold text-[color:var(--gold-foreground)] transition hover:brightness-95"
+          <Link
+            to="/projects/plotted-development"
+            className="inline-flex items-center gap-2 rounded-full bg-[color:var(--gold)] px-7 py-3.5 text-sm font-semibold text-[color:var(--gold-foreground)] shadow-lg transition hover:brightness-95"
           >
-            Explore Projects <ArrowRight className="h-4 w-4" />
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-white/60 px-7 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-[color:var(--ink)]"
+            Plotted Developments <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/projects/farmland-development"
+            className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-black/30 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white hover:text-[color:var(--ink)]"
           >
-            Get in Touch
-          </a>
+            Farmland Projects
+          </Link>
         </div>
       </div>
     </section>
@@ -249,24 +234,24 @@ function Hero() {
 
 function About() {
   const stats = [
-    { n: "15+", l: "Years" },
-    { n: "3,000+", l: "Projects" },
-    { n: "9M+", l: "SqFt Transacted" },
-    { n: "55+", l: "Ongoing Projects" },
+    { n: "100%", l: "Legal Transparency" },
+    { n: "Turnkey", l: "End-to-End Solutions" },
+    { n: "Quality", l: "Construction Standards" },
+    { n: "Customer", l: "First Approach" },
   ];
   return (
     <section id="about" className="py-24">
       <div className="container-x grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
-          <p className="eyebrow">About Nimma Metro</p>
+          <p className="eyebrow">About Us</p>
           <h2 className="mt-3 font-display text-4xl md:text-5xl">
             A journey of Excellence and Innovation
           </h2>
-          <p className="mt-6 text-muted-foreground">
-            With more than 15 years of industry experience, Nimma Metro is one of the most trusted
-            builders in Bangalore. Our reputation is founded on trust, transparency, and an
-            uncompromising pursuit of quality. We prioritize our customers' aspirations, delivering
-            spaces that reflect style, comfort, and functionality.
+          <p className="mt-6 text-muted-foreground leading-relaxed">
+            At Nimmametro Constructionss, we turn land into opportunity. Our expertise in plotted development, residential layouts, and infrastructure development ensures every project is built with quality, transparency, and long-term value.
+          </p>
+          <p className="mt-3 text-sm font-semibold text-[color:var(--gold)]">
+            Founded by Mr. Beerappa N
           </p>
           <Link
             to="/about"
@@ -298,8 +283,7 @@ function Services() {
           <p className="eyebrow">What we do</p>
           <h2 className="mt-3 font-display text-4xl md:text-5xl">Our services</h2>
           <p className="mt-6 text-muted-foreground">
-            Our purpose is to revolutionize homes and build iconic landmarks across South India — a
-            turnkey solution across every stage of your project.
+            Specializing in end-to-end plotted development and land development projects across Karnataka — from master layout planning and site preparation to internal asphalt roads, electrical infrastructure, and underground drainage networks.
           </p>
         </div>
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -314,7 +298,9 @@ function Services() {
                   src={s.img}
                   alt={s.title}
                   loading="lazy"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  className={`h-full w-full object-cover transition duration-700 group-hover:scale-105 ${
+                    s.title === "Layout Approvals" ? "object-[50%_65%]" : "object-center"
+                  }`}
                 />
               </div>
               <div className="p-6">
@@ -331,233 +317,89 @@ function Services() {
   );
 }
 
-function RealEstate() {
+function LatestProjects() {
+  const [allProjects, setAllProjects] = useState<ProjectItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAllProjects().then((data) => {
+      setAllProjects(data);
+      setLoading(false);
+    });
+  }, []);
+
   return (
-    <section id="projects" className="py-24">
+    <section id="projects" className="py-24 bg-background">
       <div className="container-x">
         <div className="max-w-2xl">
           <p className="eyebrow">Featured Projects</p>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl">Real Estate</h2>
-          <p className="mt-6 text-muted-foreground">
-            As a leading real estate company in Bangalore, we develop thoughtfully planned
-            residential and commercial spaces designed for comfort, convenience and investment
-            value.
+          <h2 className="mt-3 font-display text-4xl md:text-5xl">Latest Projects</h2>
+          <p className="mt-6 text-muted-foreground leading-relaxed">
+            Explore our latest master-planned plotted developments and managed farmland projects across Karnataka — built with premium infrastructure, clear titles, and long-term value.
           </p>
         </div>
-        <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {realEstate.map((p) => (
-            <article
-              key={p.name}
-              className="group overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-border"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={p.img}
-                  alt={p.name}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="font-display text-2xl">{p.name}</h3>
-                <div className="mt-4 grid grid-cols-2 gap-4 border-y border-border py-4 text-sm">
+        {loading ? (
+          <div className="flex items-center justify-center py-24">
+            <Loader2 className="h-8 w-8 animate-spin text-[color:var(--gold)]" />
+            <span className="ml-3 text-muted-foreground">Loading projects...</span>
+          </div>
+        ) : allProjects.length === 0 ? (
+          <div className="py-24 text-center text-muted-foreground">
+            <p className="text-lg">No projects available yet.</p>
+            <p className="mt-2 text-sm">Check back soon for new listings!</p>
+          </div>
+        ) : (
+          <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {allProjects.map((p) => (
+              <article
+                key={p.id}
+                className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-border transition hover:shadow-xl"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img
+                    src={p.img}
+                    alt={p.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  />
+                  <span
+                    className={`absolute top-4 left-4 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white ${
+                      p.status === "Completed"
+                        ? "bg-emerald-600"
+                        : "bg-[color:var(--gold)] text-black"
+                    }`}
+                  >
+                    {p.status}
+                  </span>
+                  <span className="absolute bottom-4 left-4 rounded-full bg-black/60 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur">
+                    {p.category === "plotted" ? "Plotted Development" : "Farmland Development"}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col justify-between p-6">
                   <div>
-                    <div className="font-semibold text-[color:var(--ink)]">{p.type}</div>
+                    <p className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <MapPin className="h-3.5 w-3.5 text-[color:var(--gold)] flex-shrink-0" />
+                      {p.location} • {p.subLocation}
+                    </p>
+                    <h3 className="mt-2 font-display text-xl font-bold">{p.name}</h3>
+                    <p className="mt-3 text-xs leading-relaxed text-muted-foreground line-clamp-2">
+                      {p.description}
+                    </p>
                   </div>
-                  <div>
-                    <div className="font-semibold text-[color:var(--ink)]">{p.price}</div>
-                    <div className="text-xs text-muted-foreground">Onwards</div>
-                  </div>
-                  <div>
-                    <div className="font-semibold text-[color:var(--ink)]">{p.units}</div>
-                    <div className="text-xs text-muted-foreground">Units</div>
-                  </div>
-                  <div>
-                    <div className="font-semibold text-[color:var(--ink)]">{p.location}</div>
-                    <div className="text-xs text-muted-foreground">{p.sub}</div>
+                  <div className="mt-6 border-t border-border pt-4">
+                    <Link
+                      to="/projects/$id"
+                      params={{ id: p.id }}
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--ink)] py-2.5 text-xs font-semibold text-white transition hover:bg-[color:var(--gold)] hover:text-black"
+                    >
+                      View Project <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
                   </div>
                 </div>
-                <a
-                  href="#contact"
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--gold)]"
-                >
-                  Details <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Construction() {
-  return (
-    <section className="bg-[color:var(--ink)] py-24 text-white">
-      <div className="container-x">
-        <div className="max-w-2xl">
-          <p className="eyebrow">Featured Projects</p>
-          <h2 className="mt-3 font-display text-4xl text-white md:text-5xl">House Construction</h2>
-          <p className="mt-6 text-white/70">
-            Nimma Metro is recognized as one of the most trusted construction companies in
-            Bangalore. Turnkey construction services starting from ₹ 1,875 per sqft — everything
-            from concept to completion under one roof.
-          </p>
-        </div>
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {construction.map((img, i) => (
-            <div key={i} className="group relative overflow-hidden rounded-2xl">
-              <img
-                src={img}
-                alt={`Construction project ${i + 1}`}
-                loading="lazy"
-                className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition group-hover:opacity-100" />
-              <a
-                href="#contact"
-                className="absolute inset-x-0 bottom-6 mx-auto w-max rounded-full border border-white/70 bg-black/40 px-6 py-2 text-sm font-semibold text-white opacity-0 backdrop-blur transition group-hover:opacity-100"
-              >
-                View Project
-              </a>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Interiors() {
-  return (
-    <section className="py-24">
-      <div className="container-x">
-        <div className="max-w-2xl">
-          <p className="eyebrow">Featured Projects</p>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl">Interior Design</h2>
-          <p className="mt-6 text-muted-foreground">
-            As a premier interior design company in Bangalore, we transform ordinary spaces into
-            extraordinary living environments — from smart modular kitchens to elegant living rooms.
-          </p>
-        </div>
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
-          {interiors.map((p) => (
-            <article key={p.name} className="group">
-              <div className="overflow-hidden rounded-2xl">
-                <img
-                  src={p.img}
-                  alt={p.name}
-                  loading="lazy"
-                  className="aspect-video w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-              </div>
-              <h3 className="mt-5 font-display text-2xl">{p.name}</h3>
-              <p className="text-sm text-muted-foreground">{p.city}</p>
-              <a
-                href="#contact"
-                className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--gold)]"
-              >
-                View <ArrowRight className="h-4 w-4" />
-              </a>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Testimonials() {
-  return (
-    <section className="bg-[color:var(--cream)] py-24">
-      <div className="container-x grid gap-12 lg:grid-cols-2 lg:items-center">
-        <div>
-          <p className="eyebrow">Testimonials</p>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl">What our customers say</h2>
-          <p className="mt-6 text-muted-foreground">
-            At Nimma Metro, our focus is on you and what you want to achieve. We pride ourselves on
-            forging strong, lasting relationships, which help us to continue to thrive and develop.
-          </p>
-        </div>
-        <div className="relative aspect-video overflow-hidden rounded-2xl bg-[color:var(--ink)]">
-          <img
-            src={interior3}
-            alt="Testimonials"
-            loading="lazy"
-            className="h-full w-full object-cover opacity-70"
-          />
-          <button
-            aria-label="Play video"
-            className="absolute inset-0 m-auto flex h-20 w-20 items-center justify-center rounded-full bg-[color:var(--gold)] text-[color:var(--gold-foreground)] shadow-2xl transition hover:scale-105"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="ml-1 h-8 w-8">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Media() {
-  return (
-    <section className="py-24">
-      <div className="container-x">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow">Media Coverage</p>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl">Awards & Recognitions</h2>
-        </div>
-        <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
-          {awards.map((a) => (
-            <div
-              key={a}
-              className="flex h-24 items-center justify-center rounded-lg border border-border bg-card px-4 text-center font-display text-sm text-muted-foreground transition hover:text-[color:var(--ink)]"
-            >
-              {a}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Blogs() {
-  return (
-    <section id="blogs" className="bg-[color:var(--cream)] py-24">
-      <div className="container-x">
-        <div className="max-w-2xl">
-          <p className="eyebrow">Insights</p>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl">Latest blogs</h2>
-          <p className="mt-6 text-muted-foreground">
-            Stay updated with the latest insights, trends, and tips in real estate, construction and
-            interior design.
-          </p>
-        </div>
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
-          {blogs.map((b) => (
-            <article
-              key={b.title}
-              className="group overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-border"
-            >
-              <div className="aspect-[16/10] overflow-hidden">
-                <img
-                  src={b.img}
-                  alt={b.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-6">
-                <span className="eyebrow">Blogs</span>
-                <h3 className="mt-3 font-display text-xl leading-snug">{b.title}</h3>
-                <p className="mt-3 text-xs text-muted-foreground">{b.date}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -567,38 +409,98 @@ function ContactForm() {
   return (
     <section id="contact" className="relative isolate overflow-hidden bg-[color:var(--ink)] py-24 text-white">
       <img
-        src={heroVilla}
+        src={heroPlottedDev}
         alt=""
         aria-hidden
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover opacity-15"
       />
       <div className="container-x relative grid gap-12 lg:grid-cols-2">
+
+        {/* LEFT: Title + Contact Info + Social */}
         <div>
           <p className="eyebrow">Connect with us</p>
           <h2 className="mt-3 font-display text-4xl text-white md:text-5xl">
             Let's start something great together
           </h2>
           <p className="mt-6 max-w-lg text-white/70">
-            Whether you seek your custom home, a top-class flat, land, or interiors — call us today
-            and one of our team members will contact you within 24 hours.
+            Have a land development project or need expert guidance? Nimmametro Constructions is here to help. Whether you're planning a residential layout, farmland development, infrastructure works, or need assistance with layout approvals, our experienced team is ready to assist you.
           </p>
           <div className="mt-10 space-y-4 text-sm">
-            <a href="tel:+918884898765" className="flex items-center gap-3 text-white/85 hover:text-[color:var(--gold)]">
-              <Phone className="h-4 w-4 text-[color:var(--gold)]" /> 888-4898-765
+            <a href="tel:+919148806063" className="flex items-center gap-3 text-white/85 hover:text-[color:var(--gold)]">
+              <Phone className="h-4 w-4 text-[color:var(--gold)] shrink-0" /> +91 91488 06063
             </a>
-            <a href="mailto:info@nimmametro.com" className="flex items-center gap-3 text-white/85 hover:text-[color:var(--gold)]">
-              <Mail className="h-4 w-4 text-[color:var(--gold)]" /> info@nimmametro.com
+            <a href="mailto:constructions@nimmametro.com" className="flex items-center gap-3 text-white/85 hover:text-[color:var(--gold)]">
+              <Mail className="h-4 w-4 text-[color:var(--gold)] shrink-0" /> constructions@nimmametro.com
             </a>
-            <div className="flex items-start gap-3 text-white/85">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--gold)]" />
-              No-34-1 First Floor Promenade, Junction, Meanee Ave Rd, Sindhi Colony,
-              Sivanchetti Gardens, Bengaluru, Karnataka 560042
+            <a href="http://www.nimmametroconstructions.com" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white/85 hover:text-[color:var(--gold)]">
+              <Globe className="h-4 w-4 text-[color:var(--gold)] shrink-0" /> www.nimmametroconstructions.com
+            </a>
+            <div className="flex items-start gap-3 text-white/85 pt-2">
+              <MapPin className="mt-1 h-4 w-4 shrink-0 text-[color:var(--gold)]" />
+              <div>
+                <p className="font-semibold text-white mb-1">Nimmametro Constructions</p>
+                <p>212/A, 1st Main Road, Domlur Stage 2,</p>
+                <p>Domlur, Bengaluru, Karnataka – 560071</p>
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-8 max-w-lg text-sm text-white/70">
+            We proudly serve clients across Karnataka with complete end-to-end land development and infrastructure solutions. Contact us today to discuss your project and discover how we can bring your vision to life.
+          </p>
+
+          <div className="mt-8">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--gold)]">Follow Us</p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 transition hover:border-[color:var(--gold)] hover:bg-[color:var(--gold)] hover:text-[color:var(--gold-foreground)]"
+                  aria-label={s.name}
+                  title={s.name}
+                >
+                  <s.icon className="h-4 w-4" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
+
+        {/* RIGHT: Enquiry Form */}
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const form = e.currentTarget;
+            const formData = new FormData(form);
+            const data = {
+              name: formData.get("name"),
+              phone: formData.get("phone"),
+              email: formData.get("email"),
+              service: formData.get("service"),
+              message: formData.get("message")
+            };
+            try {
+              const res = await fetch("http://localhost/nimmabackend/api/enquiries.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+              });
+              const json = await res.json();
+              if (json.status) {
+                alert("Thank you! Your enquiry has been submitted successfully.");
+                form.reset();
+              } else {
+                alert("Submission failed: " + (json.message || "Unknown error"));
+              }
+            } catch (err: any) {
+              alert("Error submitting form. Please try again later.");
+              console.error(err);
+            }
+          }}
           className="grid gap-4 rounded-2xl bg-white/5 p-8 ring-1 ring-white/10 backdrop-blur"
         >
           <Field label="Name" name="name" />
@@ -608,18 +510,17 @@ function ContactForm() {
             <span className="text-xs uppercase tracking-widest text-white/60">
               Choose Your Requirement
             </span>
-            <select className="mt-2 w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:border-[color:var(--gold)]">
-              <option className="text-black">Real Estate Projects</option>
-              <option className="text-black">House Construction</option>
-              <option className="text-black">Interior Design</option>
-              <option className="text-black">Real Estate Marketing</option>
-              <option className="text-black">Investment Advisory</option>
-              <option className="text-black">Job Opportunity</option>
+            <select name="service" className="mt-2 w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:border-[color:var(--gold)]">
+              <option value="" className="text-black">Select an option</option>
+              <option value="Plotted Development" className="text-black">Plotted Development</option>
+              <option value="Farmland Development" className="text-black">Farmland Development</option>
+              <option value="Others" className="text-black">Others</option>
             </select>
           </label>
           <label className="block">
             <span className="text-xs uppercase tracking-widest text-white/60">Message</span>
             <textarea
+              name="message"
               rows={4}
               className="mt-2 w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:border-[color:var(--gold)]"
             />
@@ -631,6 +532,7 @@ function ContactForm() {
             Submit Details <ArrowRight className="h-4 w-4" />
           </button>
         </form>
+
       </div>
     </section>
   );
@@ -658,37 +560,25 @@ function Footer() {
     "Investment Advisory",
     "Natural Raw Commodities",
   ];
-  const typology = [
-    "Plots in Bangalore",
-    "Plots in Penukonda",
-    "Plots in Devanahalli",
-    "Flats in Bangalore",
-    "Flats in Devanahalli",
-  ];
   const quick = ["Join Our Team", "Refer & Earn", "Become Our Partner"];
-  const socials = [
-    { icon: Facebook, href: "#" },
-    { icon: Twitter, href: "#" },
-    { icon: Youtube, href: "#" },
-    { icon: MessageCircle, href: "#" },
-    { icon: Instagram, href: "#" },
-    { icon: Linkedin, href: "#" },
-  ];
   return (
     <footer className="bg-black py-16 text-white/80">
-      <div className="container-x grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+      <div className="container-x grid gap-12 md:grid-cols-2 lg:grid-cols-3">
         <div>
           <Logo dark />
           <p className="mt-6 max-w-xs text-sm text-white/60">
-            Complete Living Solutions — building trust, homes and landmarks across South India.
+            Building trust, homes and landmarks across South India.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            {socials.map((s, i) => (
+            {socialLinks.map((s) => (
               <a
-                key={i}
+                key={s.name}
                 href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-[color:var(--gold)] hover:text-[color:var(--gold)]"
-                aria-label="social"
+                aria-label={s.name}
+                title={s.name}
               >
                 <s.icon className="h-4 w-4" />
               </a>
@@ -696,7 +586,6 @@ function Footer() {
           </div>
         </div>
         <FooterCol title="Services" items={services} />
-        <FooterCol title="Typology" items={typology} />
         <div>
           <h4 className="font-display text-sm uppercase tracking-widest text-[color:var(--gold)]">
             Contact
@@ -731,7 +620,7 @@ function Footer() {
         </div>
       </div>
       <div className="container-x mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row md:items-center">
-        <div>© {new Date().getFullYear()} Nimma Metro. All rights reserved.</div>
+        <div>© {new Date().getFullYear()} Nimmametro Constructions. All rights reserved.</div>
         <div className="flex gap-6">
           <a href="#" className="hover:text-[color:var(--gold)]">Privacy Policy</a>
           <a href="#" className="hover:text-[color:var(--gold)]">Terms & Conditions</a>

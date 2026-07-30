@@ -78,17 +78,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nimma Metro | Complete Living Solutions in Bangalore" },
+      { title: "Nimmametro Constructions | Trusted Builders & Land Development" },
       {
         name: "description",
         content:
-          "Nimma Metro is one of Bangalore's most trusted builders — real estate, turnkey construction, interior design and investment advisory.",
+          "Nimmametro Constructions is one of Bangalore's most trusted builders — real estate, turnkey construction, interior design and investment advisory.",
       },
-      { name: "author", content: "Nimma Metro" },
-      { property: "og:title", content: "Nimma Metro | Complete Living Solutions" },
+      { name: "author", content: "Nimmametro Constructions" },
+      { property: "og:title", content: "Nimmametro Constructions | Trusted Builders & Land Development" },
       {
         property: "og:description",
-        content: "15+ years of excellence in real estate, construction and interiors across South India.",
+        content: "Excellence in real estate, plotted development, and construction across South India.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

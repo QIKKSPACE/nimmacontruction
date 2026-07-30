@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import {
   MapPin,
   CheckCircle2,
@@ -9,27 +10,40 @@ import {
   Trees,
   ShieldCheck,
   ArrowRight,
+  Loader2,
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { getProjectById, plottedProjects, farmlandProjects } from "@/data/projects-data";
+import { fetchProjectById, type ProjectItem } from "@/data/projects-data";
 
 export const Route = createFileRoute("/projects/$id")({
-  head: ({ params }) => {
-    const project = getProjectById(params.id);
-    return {
-      meta: [
-        { title: `${project ? project.name : "Project Details"} | Nimma Metro` },
-        { name: "description", content: project?.description || "Project details" },
-      ],
-    };
-  },
   component: ProjectDetailPage,
 });
 
 function ProjectDetailPage() {
   const { id } = Route.useParams();
-  const project = getProjectById(id);
+  const [project, setProject] = useState<ProjectItem | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProjectById(id).then((data) => {
+      setProject(data);
+      setLoading(false);
+    });
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex flex-col justify-between">
+        <SiteHeader />
+        <div className="container-x py-24 flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-[color:var(--gold)]" />
+          <span className="ml-3 text-muted-foreground">Loading project details...</span>
+        </div>
+        <SiteFooter />
+      </div>
+    );
+  }
 
   if (!project) {
     return (
@@ -105,16 +119,6 @@ function ProjectDetailPage() {
               </p>
             </div>
 
-            <div className="rounded-xl bg-muted/70 p-4 border border-border flex items-center gap-6">
-              <div>
-                <span className="block text-xs uppercase tracking-wider text-muted-foreground">Investment</span>
-                <span className="font-display text-xl font-bold text-[color:var(--gold)]">{project.price}</span>
-              </div>
-              <div className="border-l border-border pl-6">
-                <span className="block text-xs uppercase tracking-wider text-muted-foreground">Total Units</span>
-                <span className="font-display text-lg font-semibold">{project.units}</span>
-              </div>
-            </div>
           </div>
 
           {/* Image Gallery */}
@@ -146,47 +150,53 @@ function ProjectDetailPage() {
               </div>
 
               {/* Technical Specifications */}
-              <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-                <h3 className="font-display text-xl font-bold">Project Specifications</h3>
-                <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  {project.specs.map((s, i) => (
-                    <div key={i} className="rounded-xl bg-muted/60 p-4 border border-border/50">
-                      <span className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                        {s.label}
-                      </span>
-                      <span className="mt-1 block text-sm font-bold">{s.value}</span>
-                    </div>
-                  ))}
+              {project.specs.length > 0 && (
+                <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+                  <h3 className="font-display text-xl font-bold">Project Specifications</h3>
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    {project.specs.map((s, i) => (
+                      <div key={i} className="rounded-xl bg-muted/60 p-4 border border-border/50">
+                        <span className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                          {s.label}
+                        </span>
+                        <span className="mt-1 block text-sm font-bold">{s.value}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Highlights */}
-              <div>
-                <h3 className="font-display text-xl font-bold">Key Highlights</h3>
-                <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  {project.highlights.map((h, i) => (
-                    <div key={i} className="flex items-start gap-3 rounded-xl border border-border bg-card p-4">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[color:var(--gold)]" />
-                      <span className="text-sm font-medium">{h}</span>
-                    </div>
-                  ))}
+              {project.highlights.length > 0 && (
+                <div>
+                  <h3 className="font-display text-xl font-bold">Key Highlights</h3>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    {project.highlights.map((h, i) => (
+                      <div key={i} className="flex items-start gap-3 rounded-xl border border-border bg-card p-4">
+                        <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[color:var(--gold)]" />
+                        <span className="text-sm font-medium">{h}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Amenities */}
-              <div>
-                <h3 className="font-display text-xl font-bold">Layout Amenities</h3>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {project.amenities.map((a, i) => (
-                    <span
-                      key={i}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-4 py-2 text-xs font-semibold"
-                    >
-                      <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--gold)]" /> {a}
-                    </span>
-                  ))}
+              {project.amenities.length > 0 && (
+                <div>
+                  <h3 className="font-display text-xl font-bold">Layout Amenities</h3>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {project.amenities.map((a, i) => (
+                      <span
+                        key={i}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-4 py-2 text-xs font-semibold"
+                      >
+                        <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--gold)]" /> {a}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Right Sidebar - Contact Form */}

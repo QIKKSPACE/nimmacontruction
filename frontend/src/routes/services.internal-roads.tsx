@@ -10,9 +10,9 @@ const TAGLINE = "Durable, well-engineered roads that shape the everyday experien
 export const Route = createFileRoute("/services/internal-roads")({
   head: () => ({
     meta: [
-      { title: `${TITLE} | Nimma Metro` },
+      { title: `${TITLE} | Nimmametro Constructions` },
       { name: "description", content: TAGLINE },
-      { property: "og:title", content: `${TITLE} | Nimma Metro` },
+      { property: "og:title", content: `${TITLE} | Nimmametro Constructions` },
       { property: "og:description", content: TAGLINE },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

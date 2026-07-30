@@ -1,51 +1,48 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Twitter, Youtube, Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { serviceList } from "@/data/service-list";
+import { socialLinks } from "@/data/social-links";
 import logoAsset from "@/assets/nimma-metro-logo.jpeg.asset.json";
 
 export function SiteFooter() {
-  const typology = [
-    "Plots in Bangalore",
-    "Plots in Penukonda",
-    "Plots in Devanahalli",
-    "Flats in Bangalore",
-    "Flats in Devanahalli",
-  ];
-  const socials = [Facebook, Twitter, Youtube, MessageCircle, Instagram, Linkedin];
   return (
     <footer className="bg-black py-16 text-white/80">
-      <div className="container-x grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+      <div className="container-x grid gap-12 md:grid-cols-2 lg:grid-cols-3">
         <div>
-          <Link to="/" className="flex items-center gap-2">
-            <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white">
+          <Link to="/" className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-white/20">
               <img src={logoAsset.url} alt="Nimma Metro" className="h-full w-full object-contain" />
             </span>
-            <span className="flex flex-col leading-tight text-white">
-              <span className="font-display text-lg font-bold tracking-wide">NIMMA METRO</span>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--gold)]">
-                Complete Living Solutions
+            <div className="flex flex-col justify-center">
+              <span className="font-sans text-[18px] font-bold tracking-widest text-white leading-none">
+                Nimmametro Constructions
               </span>
-            </span>
+              <span className="font-sans text-[8.5px] font-medium tracking-[0.15em] text-white/80 leading-tight mt-1 uppercase">
+                Plotted & Farmland Development
+              </span>
+            </div>
           </Link>
           <p className="mt-6 max-w-xs text-sm text-white/60">
-            Complete Living Solutions — building trust, homes and landmarks across South India.
+            Building trust, homes and landmarks across South India.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            {socials.map((Icon, i) => (
+            {socialLinks.map((s) => (
               <a
-                key={i}
-                href="#"
+                key={s.name}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-[color:var(--gold)] hover:text-[color:var(--gold)]"
-                aria-label="social"
+                aria-label={s.name}
+                title={s.name}
               >
-                <Icon className="h-4 w-4" />
+                <s.icon className="h-4 w-4" />
               </a>
             ))}
           </div>
         </div>
         <div>
           <h4 className="font-display text-sm uppercase tracking-widest text-[color:var(--gold)]">
-            Company
+            Services & Links
           </h4>
           <ul className="mt-5 space-y-2 text-sm">
             <li>
@@ -64,41 +61,29 @@ export function SiteFooter() {
         </div>
         <div>
           <h4 className="font-display text-sm uppercase tracking-widest text-[color:var(--gold)]">
-            Typology
-          </h4>
-          <ul className="mt-5 space-y-2 text-sm">
-            {typology.map((t) => (
-              <li key={t}>
-                <a href="#" className="hover:text-[color:var(--gold)]">
-                  {t}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-display text-sm uppercase tracking-widest text-[color:var(--gold)]">
             Contact
           </h4>
           <ul className="mt-5 space-y-3 text-sm">
             <li>
-              <a href="tel:+918884898765" className="hover:text-[color:var(--gold)]">
-                888-4898-765
+              <a href="tel:+919148806063" className="hover:text-[color:var(--gold)]">
+                +91 91488 06063
               </a>
             </li>
             <li>
-              <a href="mailto:info@nimmametro.com" className="hover:text-[color:var(--gold)]">
-                info@nimmametro.com
+              <a href="mailto:constructions@nimmametro.com" className="hover:text-[color:var(--gold)]">
+                constructions@nimmametro.com
               </a>
             </li>
             <li className="text-white/60">
-              No-34-1 First Floor Promenade, Sivanchetti Gardens, Bengaluru 560042
+              Nimmametro Constructions<br />
+              212/A, 1st Main Road, Domlur Stage 2,<br />
+              Domlur, Bengaluru, Karnataka – 560071
             </li>
           </ul>
         </div>
       </div>
       <div className="container-x mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row md:items-center">
-        <div>© {new Date().getFullYear()} Nimma Metro. All rights reserved.</div>
+        <div>© {new Date().getFullYear()} Nimmametro Constructionss. All rights reserved.</div>
         <div className="flex gap-6">
           <a href="#" className="hover:text-[color:var(--gold)]">Privacy Policy</a>
           <a href="#" className="hover:text-[color:var(--gold)]">Terms & Conditions</a>

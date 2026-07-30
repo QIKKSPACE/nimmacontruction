@@ -7,16 +7,18 @@ import logoAsset from "@/assets/nimma-metro-logo.jpeg.asset.json";
 
 function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-2">
-      <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white">
-        <img src={logoAsset.url} alt="Nimma Metro" className="h-full w-full object-contain" />
+    <Link to="/" className="flex items-center gap-3">
+      <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-white/20">
+        <img src={logoAsset.url} alt="Nimmametro Constructions" className="h-full w-full object-contain" />
       </span>
-      <span className="flex flex-col leading-tight text-white">
-        <span className="font-display text-lg font-bold tracking-wide">NIMMA METRO</span>
-        <span className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--gold)]">
-          Complete Living Solutions
+      <div className="flex flex-col justify-center">
+        <span className="font-sans text-[18px] font-bold tracking-widest text-white leading-none">
+          Nimmametro Constructions
         </span>
-      </span>
+        <span className="font-sans text-[8.5px] font-medium tracking-[0.15em] text-white/80 leading-tight mt-1 uppercase">
+          Plotted & Farmland Development
+        </span>
+      </div>
     </Link>
   );
 }
@@ -61,7 +63,7 @@ export function SiteHeader() {
             </button>
             {servicesOpen && (
               <div className="absolute left-1/2 top-full w-[320px] -translate-x-1/2 pt-3">
-                <div className="rounded-xl border border-white/10 bg-[color:var(--ink)] p-2 shadow-2xl ring-1 ring-[color:var(--gold)]/20">
+                <div className="max-h-[400px] overflow-y-auto rounded-xl border border-white/10 bg-[color:var(--ink)] p-2 shadow-2xl ring-1 ring-[color:var(--gold)]/20">
                   {serviceList.map((s) => (
                     <Link
                       key={s.slug}

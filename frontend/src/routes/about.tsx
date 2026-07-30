@@ -3,9 +3,9 @@ import { ArrowRight, CheckCircle2, Phone, Mail, MapPin } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import heroImg from "@/assets/about/about-hero.jpg";
-import founderImg from "@/assets/about/about-founder.jpg";
-import site1 from "@/assets/about/about-site-1.jpg";
-import site2 from "@/assets/about/about-site-2.jpg";
+import founderImg from "@/assets/about/about-founder.png";
+import site1 from "@/assets/about/about-site-1.png";
+import site2 from "@/assets/about/about-site-2.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Nimmametro Constructions is a trusted plotted development and land development company in Karnataka with 10+ years of experience, 74+ completed projects and presence across 14+ districts.",
+          "Nimmametro Constructions is a modern plotted development and land development company in Karnataka, specializing in well-planned residential layouts, farmland projects, and infrastructure-ready developments.",
       },
       { property: "og:title", content: "About Us | Nimmametro Constructions" },
       {
@@ -30,21 +30,21 @@ export const Route = createFileRoute("/about")({
 });
 
 const stats = [
-  { n: "10+", l: "Years of Experience" },
-  { n: "74+", l: "Completed Projects" },
-  { n: "14+", l: "Districts in Karnataka" },
+  { n: "100%", l: "Legal Transparency" },
+  { n: "End-to-End", l: "Land Solutions" },
+  { n: "Quality", l: "Infrastructure Focus" },
 ];
 
 const whyChoose = [
-  "10+ Years of Industry Experience",
-  "74+ Successfully Completed Projects",
-  "Presence Across 14+ Districts in Karnataka",
   "End-to-End Land Development Solutions",
   "Experienced Engineering & Project Management Team",
   "Quality Construction Materials & Modern Equipment",
   "On-Time Project Delivery",
-  "Transparent Business Practices",
+  "Transparent & Ethical Business Practices",
   "Customized Solutions for Projects from 1 Acre to 100+ Acres",
+  "Comprehensive Legal Approvals & Compliance",
+  "Focus on Sustainable & Future-Ready Communities",
+  "Dedicated Customer Support",
 ];
 
 const mission = [
@@ -60,10 +60,11 @@ function AboutPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
 
+      {/* Hero Banner */}
       <section className="relative isolate">
         <img
           src={heroImg}
-          alt="Nimmametro plotted development aerial view"
+          alt="Nimmametro Constructions plotted development aerial view"
           width={1920}
           height={1080}
           className="absolute inset-0 h-full w-full object-cover"
@@ -75,12 +76,13 @@ function AboutPage() {
             About Nimmametro Constructions
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-white/85">
-            A trusted plotted development and land development company transforming raw land into
+            A customer-centric plotted development and land development company transforming raw land into
             well-planned, infrastructure-ready communities across Karnataka.
           </p>
         </div>
       </section>
 
+      {/* Story Section */}
       <section className="py-20">
         <div className="container-x grid gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
@@ -88,29 +90,32 @@ function AboutPage() {
             <h2 className="mt-3 font-display text-3xl md:text-4xl">
               Building Karnataka, one responsible development at a time
             </h2>
-            <p className="mt-6 text-muted-foreground">
-              Nimmametro Constructions is a trusted plotted development and land development company
-              with over 10 years of industry experience. We specialize in transforming raw land
-              into well-planned residential layouts, farmland projects, and infrastructure-ready
-              developments across Karnataka.
+            <p className="mt-6 text-muted-foreground leading-relaxed">
+              At Nimmametro Constructionss, we turn land into opportunity. Our expertise in plotted development, residential layouts, and infrastructure development ensures every project is built with quality, transparency, and long-term value.
             </p>
             <p className="mt-4 text-muted-foreground">
-              With a strong presence in 14+ districts and a successful portfolio of 74+ completed
-              projects, we have earned a reputation for quality, transparency, and timely project
-              execution. Our expertise covers every stage of land development, from legal approvals
-              and planning to infrastructure development and final handover.
+              With a strong presence across key growth regions, we have earned a reputation for quality,
+              transparency, and timely project execution. Our expertise covers every stage of land
+              development, from legal approvals and planning to infrastructure development and final
+              handover.
             </p>
             <p className="mt-4 text-muted-foreground">
-              Whether it is a 1-acre residential project or a 100+ acre township, our experienced
-              team delivers innovative planning, superior construction quality, and sustainable
-              infrastructure.
+              Founded by Mr. Beerappa N, Nimmametro Constructions was established with a vision to provide
+              landowners and developers with a complete end-to-end development solution. Whether it is a
+              1-acre residential project or a 100+ acre layout, our team delivers innovative planning,
+              superior construction quality, and sustainable infrastructure.
+            </p>
+            <p className="mt-4 text-muted-foreground">
+              We are committed to creating organized, modern, and environmentally responsible
+              communities that improve the quality of life for citizens while maximizing the value
+              of every development.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="aspect-[4/3] overflow-hidden rounded-2xl sm:col-span-2">
               <img
                 src={site2}
-                alt="Nimmametro completed development entrance"
+                alt="Nimmametro Constructions completed development entrance"
                 loading="lazy"
                 className="h-full w-full object-cover"
               />
@@ -118,21 +123,22 @@ function AboutPage() {
             <div className="aspect-[4/3] overflow-hidden rounded-2xl">
               <img
                 src={site1}
-                alt="Nimmametro land development site work"
+                alt="Nimmametro Constructions land development site work"
                 loading="lazy"
                 className="h-full w-full object-cover"
               />
             </div>
             <div className="rounded-2xl border border-border bg-[color:var(--cream)] p-6">
-              <p className="font-display text-4xl text-[color:var(--ink)] md:text-5xl">74+</p>
+              <p className="font-display text-3xl font-bold text-[color:var(--ink)] md:text-4xl">Quality</p>
               <p className="mt-2 text-sm uppercase tracking-widest text-[color:var(--gold)]">
-                Projects delivered
+                Excellence Delivered
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Leadership */}
       <section className="bg-[color:var(--cream)] py-20">
         <div className="container-x grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div className="order-2 lg:order-1">
@@ -149,10 +155,10 @@ function AboutPage() {
             <p className="eyebrow">Leadership</p>
             <h2 className="mt-3 font-display text-3xl md:text-4xl">Founded by Mr. Beerappa N</h2>
             <p className="mt-6 text-muted-foreground">
-              Nimmametro Constructions was established with a vision to provide landowners and
-              developers with a complete end-to-end development solution. Under the leadership of
-              Mr. Beerappa N, the company has grown into a reliable partner for plotted
-              developments, farmland projects and large-scale land infrastructure across Karnataka.
+              Nimmametro Constructions was established with a vision to provide landowners and developers
+              with a complete end-to-end development solution. Under the leadership of Mr. Beerappa
+              N, the company is growing into a reliable partner for plotted developments, farmland
+              projects and land infrastructure across Karnataka.
             </p>
             <p className="mt-4 text-muted-foreground">
               We are committed to creating organized, modern, and environmentally responsible
@@ -163,6 +169,7 @@ function AboutPage() {
         </div>
       </section>
 
+      {/* Vision & Mission */}
       <section className="py-20">
         <div className="container-x">
           <div className="grid gap-12 lg:grid-cols-3">
@@ -199,6 +206,7 @@ function AboutPage() {
         </div>
       </section>
 
+      {/* Why Choose Us */}
       <section className="bg-[color:var(--ink)] py-20 text-white">
         <div className="container-x">
           <div className="mx-auto max-w-3xl text-center">
@@ -225,7 +233,7 @@ function AboutPage() {
           <div className="mt-12 grid gap-6 border-t border-white/10 pt-12 sm:grid-cols-3">
             {stats.map((s) => (
               <div key={s.l} className="text-center">
-                <div className="font-display text-4xl text-[color:var(--gold)] md:text-5xl">
+                <div className="font-display text-3xl font-bold text-[color:var(--gold)] md:text-4xl">
                   {s.n}
                 </div>
                 <div className="mt-2 text-sm uppercase tracking-widest text-white/70">{s.l}</div>
@@ -235,6 +243,31 @@ function AboutPage() {
         </div>
       </section>
 
+      {/* Our Projects Overview */}
+      <section className="bg-[color:var(--cream)] py-20">
+        <div className="container-x">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="eyebrow">Excellence in Execution</p>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl">Our Projects</h2>
+            <p className="mt-6 text-muted-foreground">
+              At Nimmametro Constructions, every project reflects our commitment to quality, precision, and
+              timely execution. We transform raw land into well-planned residential layouts, farmland
+              developments, and infrastructure-ready communities.
+            </p>
+            <p className="mt-4 text-muted-foreground">
+              Our portfolio showcases a wide range of developments, from boutique projects to multi-acre
+              layouts, featuring modern infrastructure such as roads, drainage systems, underground
+              utilities, parks, landscaping, entrance arches, and essential amenities.
+            </p>
+            <p className="mt-4 font-medium text-foreground">
+              Browse our developments to see how we create sustainable, high-quality projects that add
+              lasting value for landowners, developers, and communities across Karnataka.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
       <section className="py-20">
         <div className="container-x">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -244,8 +277,8 @@ function AboutPage() {
                 Ready to develop your land?
               </h2>
               <p className="mt-6 text-muted-foreground">
-                From a 1-acre plot to a 100+ acre township, our team is ready to guide your project
-                from planning to handover. Let's discuss how Nimmametro Constructions can bring
+                From a boutique layout to large-scale developments, our team is ready to guide your
+                project from planning to handover. Let's discuss how Nimmametro Constructions can bring
                 your vision to life.
               </p>
               <div className="mt-8 space-y-3 text-sm">
@@ -271,7 +304,7 @@ function AboutPage() {
             <div className="overflow-hidden rounded-2xl">
               <img
                 src={site1}
-                alt="Nimmametro active land development site"
+                alt="Nimmametro Constructions active land development site"
                 loading="lazy"
                 className="h-full w-full object-cover"
               />
