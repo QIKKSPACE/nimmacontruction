@@ -5,7 +5,7 @@ import img2 from "@/assets/svc/wall-2.jpg";
 import img3 from "@/assets/svc/wall-3.jpg";
 
 const TITLE = "Compound Wall Construction";
-const TAGLINE = "The strong, elegant boundary that defines your community.";
+const TAGLINE = "Durable precast & hollow block boundary walls for layout security.";
 
 export const Route = createFileRoute("/services/compound-wall-construction")({
   head: () => ({
@@ -27,23 +27,16 @@ function Page() {
       slug="compound-wall-construction"
       title={TITLE}
       tagline={TAGLINE}
-      intro="A compound wall is the first thing anyone sees. We build boundary walls that combine structural strength with clean architectural detailing — precast, masonry or RCC — around plots, layouts and estates."
+      intro="Providing durable and secure boundary solutions for plotted developments using hollow block walls and precast concrete walls. Our compound wall construction ensures strong protection, clear site demarcation, and enhanced project aesthetics with quality materials, proper alignment, and long-lasting finishes for residential layouts and farmland developments."
       heroImg={img1}
       gallery={[img1, img2, img3]}
       features={[
-        "Precast panel walls (fast track)",
-        "Random rubble & block masonry",
-        "RCC retaining walls",
-        "Architectural entrance gateways",
-        "Anti-climb copings & finials",
-        "Long-life exterior finishes",
+        "Precast & hollow block walls",
+        "Strong boundary protection",
+        "Clear site demarcation",
+        "Long-lasting finishes"
       ]}
-      process={[
-        { step: "Boundary Survey", detail: "Verifying legal boundaries against title documents." },
-        { step: "Foundation", detail: "Isolated / strip footings suited to soil conditions." },
-        { step: "Wall Construction", detail: "Masonry or precast erection with plumb control." },
-        { step: "Finishing", detail: "Plaster, painting and coping to a durable finish." },
-      ]}
+      process={[]}
     />
   );
 }

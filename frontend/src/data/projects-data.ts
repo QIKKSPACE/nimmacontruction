@@ -10,9 +10,14 @@ export type ProjectItem = {
   img: string;
   gallery: string[];
   description: string;
-  highlights: string[];
-  specs: { label: string; value: string }[];
-  amenities: string[];
+  highlights?: string[];
+  specs?: { label: string; value: string }[];
+  amenities?: string[];
+  developmentArea?: string;
+  googleMap?: string;
+  youtubeVideo?: string;
+  instagramVideo?: string;
+  infrastructureWorks?: string[];
 };
 
 // Fetch all projects from DB
@@ -34,6 +39,11 @@ export async function fetchAllProjects(): Promise<ProjectItem[]> {
         highlights: Array.isArray(p.highlights) ? p.highlights : [],
         specs: Array.isArray(p.specs) ? p.specs : [],
         amenities: Array.isArray(p.amenities) ? p.amenities : [],
+        developmentArea: p.developmentArea || "",
+        googleMap: p.googleMap || "",
+        youtubeVideo: p.youtubeVideo || "",
+        instagramVideo: p.instagramVideo || "",
+        infrastructureWorks: Array.isArray(p.infrastructureWorks) ? p.infrastructureWorks : [],
       }));
     }
     return [];

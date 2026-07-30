@@ -13,6 +13,7 @@ export type ServicePageProps = {
   gallery: string[];
   features: string[];
   process: { step: string; detail: string }[];
+  children?: React.ReactNode;
 };
 
 export function ServicePageLayout(props: ServicePageProps) {
@@ -38,8 +39,13 @@ export function ServicePageLayout(props: ServicePageProps) {
             <p className="eyebrow">Overview</p>
             <h2 className="mt-3 font-display text-3xl md:text-4xl">What we deliver</h2>
             <p className="mt-6 text-lg text-muted-foreground">{props.intro}</p>
+            {props.children && (
+              <div className="mt-10">
+                {props.children}
+              </div>
+            )}
           </div>
-          <aside className="rounded-2xl border border-border bg-[color:var(--cream)] p-8">
+          <aside className="h-fit rounded-2xl border border-border bg-[color:var(--cream)] p-8">
             <h3 className="font-display text-xl">Talk to our team</h3>
             <p className="mt-3 text-sm text-muted-foreground">
               Get a scoping call and a preliminary estimate for your project.
@@ -63,28 +69,16 @@ export function ServicePageLayout(props: ServicePageProps) {
         </div>
       </section>
 
-      <section className="bg-[color:var(--cream)] py-20">
-        <div className="container-x">
-          <p className="eyebrow">Capabilities</p>
-          <h2 className="mt-3 font-display text-3xl md:text-4xl">What's included</h2>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {props.features.map((f) => (
-              <div key={f} className="flex items-start gap-3 rounded-xl bg-card p-5 ring-1 ring-border">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[color:var(--gold)]" />
-                <span className="text-sm">{f}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="py-20">
         <div className="container-x">
           <p className="eyebrow">Gallery</p>
           <h2 className="mt-3 font-display text-3xl md:text-4xl">On site</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {props.gallery.map((g, i) => (
-              <div key={i} className="aspect-[4/3] overflow-hidden rounded-2xl">
+              <div 
+                key={i} 
+                className={`aspect-[4/3] overflow-hidden rounded-2xl ${i === 3 ? "md:col-start-2" : ""}`}
+              >
                 <img
                   src={g}
                   alt={`${props.title} ${i + 1}`}
@@ -97,21 +91,40 @@ export function ServicePageLayout(props: ServicePageProps) {
         </div>
       </section>
 
-      <section className="bg-[color:var(--ink)] py-20 text-white">
-        <div className="container-x">
-          <p className="eyebrow">How we work</p>
-          <h2 className="mt-3 font-display text-3xl md:text-4xl">Our process</h2>
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {props.process.map((p, i) => (
-              <div key={p.step} className="relative rounded-2xl border border-white/10 p-6">
-                <div className="font-display text-4xl text-[color:var(--gold)]">0{i + 1}</div>
-                <h3 className="mt-3 font-display text-lg">{p.step}</h3>
-                <p className="mt-3 text-sm text-white/70">{p.detail}</p>
-              </div>
-            ))}
+      {props.features && props.features.length > 0 && (
+        <section className="bg-[color:var(--cream)] py-20">
+          <div className="container-x">
+            <p className="eyebrow">Capabilities</p>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl">What's included</h2>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {props.features.map((f) => (
+                <div key={f} className="flex items-start gap-3 rounded-xl bg-card p-5 ring-1 ring-border">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[color:var(--gold)]" />
+                  <span className="text-sm">{f}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {props.process && props.process.length > 0 && (
+        <section className="bg-[color:var(--ink)] py-20 text-white">
+          <div className="container-x">
+            <p className="eyebrow">How we work</p>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl">Our process</h2>
+            <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+              {props.process.map((p, i) => (
+                <div key={p.step} className="relative rounded-2xl border border-white/10 p-6">
+                  <div className="font-display text-4xl text-[color:var(--gold)]">0{i + 1}</div>
+                  <h3 className="mt-3 font-display text-lg">{p.step}</h3>
+                  <p className="mt-3 text-sm text-white/70">{p.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="py-20">
         <div className="container-x">

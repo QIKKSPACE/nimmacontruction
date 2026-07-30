@@ -83,10 +83,10 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="container-x mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row md:items-center">
-        <div>© {new Date().getFullYear()} Nimmametro Constructionss. All rights reserved.</div>
+        <div>© {new Date().getFullYear()} Nimmametro Constructions. All rights reserved.</div>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-[color:var(--gold)]">Privacy Policy</a>
-          <a href="#" className="hover:text-[color:var(--gold)]">Terms & Conditions</a>
+          <Link to="/privacy-policy" className="hover:text-[color:var(--gold)]">Privacy Policy</Link>
+          <Link to="/terms-conditions" className="hover:text-[color:var(--gold)]">Terms & Conditions</Link>
         </div>
       </div>
     </footer>

@@ -5,7 +5,7 @@ import img2 from "@/assets/svc/electrical-2.jpg";
 import img3 from "@/assets/svc/electrical-3.jpg";
 
 const TITLE = "Electrical Infrastructure";
-const TAGLINE = "Power that is safe, coded and future-ready.";
+const TAGLINE = "Complete electrical power distribution & street lighting networks.";
 
 export const Route = createFileRoute("/services/electrical-infrastructure")({
   head: () => ({
@@ -27,23 +27,16 @@ function Page() {
       slug="electrical-infrastructure"
       title={TITLE}
       tagline={TAGLINE}
-      intro="From HT feeders and transformers to LT distribution, street lighting and smart metering — we deliver end-to-end electrical infrastructure that meets IE Rules and utility standards."
+      intro="Providing complete electrical infrastructure solutions for plotted developments, including underground cabling, electrical poles, street lighting, and power distribution networks. We ensure safe, reliable, and efficient electricity connectivity to every plot with well-planned systems for modern communities."
       heroImg={img1}
       gallery={[img1, img2, img3]}
       features={[
-        "HT feeder line & transformer yards",
-        "LT distribution panels & cabling",
-        "Solar-ready street lighting",
-        "EV charging provisions",
-        "Individual smart meters",
-        "Earthing & lightning protection",
+        "Underground cabling",
+        "Electrical pole installation",
+        "Street lighting networks",
+        "Power distribution systems"
       ]}
-      process={[
-        { step: "Load Analysis", detail: "Sanctioned load calculation with utility coordination." },
-        { step: "Sub-station Setup", detail: "Transformer, HT panels and yard construction." },
-        { step: "LT Distribution", detail: "Underground cabling, feeder pillars and metering." },
-        { step: "Testing & Energisation", detail: "Insulation, earthing tests and utility handover." },
-      ]}
+      process={[]}
     />
   );
 }

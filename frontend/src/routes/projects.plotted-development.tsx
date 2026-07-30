@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { MapPin, CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
+import { MapPin, CheckCircle2, ArrowRight, Loader2, Youtube, Instagram, Link as LinkIcon, Ruler } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { fetchPlottedProjects, type ProjectItem } from "@/data/projects-data";
@@ -72,37 +72,81 @@ function PlottedProjectsPage() {
                       {p.status}
                     </span>
 
-                    <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <span className="flex items-center gap-1.5 text-xs text-white/80">
-                        <MapPin className="h-3.5 w-3.5 text-[color:var(--gold)]" />
-                        {p.location} • {p.subLocation}
-                      </span>
-                      <h3 className="mt-1 font-display text-xl font-bold">{p.name}</h3>
-                    </div>
                   </div>
 
                   <div className="flex flex-1 flex-col justify-between p-6">
                     <div>
-                      {/* Highlights */}
-                      <div>
-                        <ul className="space-y-2">
-                          {p.highlights.map((h, i) => (
-                            <li key={i} className="flex items-start gap-2 text-xs text-foreground/80">
-                              <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-[color:var(--gold)]" />
-                              <span>{h}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      {/* Name & Location */}
+                      <h3 className="font-display text-xl font-bold">{p.name}</h3>
+                      <p className="mt-2 flex items-start gap-1.5 text-xs text-muted-foreground">
+                        <MapPin className="h-4 w-4 text-[color:var(--gold)] flex-shrink-0" />
+                        {p.location} {p.subLocation ? `• ${p.subLocation}` : ''}
+                      </p>
+                      {p.developmentArea && (
+                        <p className="mt-1.5 flex items-start gap-1.5 text-xs text-muted-foreground">
+                          <Ruler className="text-[color:var(--gold)] flex-shrink-0 h-4 w-4" />
+                          {p.developmentArea}
+                        </p>
+                      )}
+
+                      {/* Project Highlights */}
+                      {p.description && (
+                        <div className="mt-4">
+                          <strong className="block text-xs uppercase tracking-wider text-foreground mb-1">Project Highlights</strong>
+                          <p className="text-sm text-foreground/80 line-clamp-3 leading-relaxed">
+                            {p.description}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Completed Works Preview */}
+                      {p.infrastructureWorks && p.infrastructureWorks.length > 0 && (
+                        <div className="mt-4">
+                          <strong className="block text-xs uppercase tracking-wider text-foreground mb-2">Completed Works</strong>
+                          <ul className="space-y-1.5">
+                            {p.infrastructureWorks.slice(0, 5).map((work, i) => (
+                              <li key={i} className="flex items-start gap-2 text-xs text-foreground/80">
+                                <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-[color:var(--gold)]" />
+                                <span>{work}</span>
+                              </li>
+                            ))}
+                            {p.infrastructureWorks.length > 5 && (
+                              <li className="text-xs text-muted-foreground pl-5 italic">+ {p.infrastructureWorks.length - 5} more</li>
+                            )}
+                          </ul>
+                        </div>
+                      )}
                     </div>
 
                     <div className="mt-6 border-t border-border pt-4">
+                      {/* Media Links */}
+                      {(p.googleMap || p.youtubeVideo || p.instagramVideo) && (
+                        <div className="mb-4 flex flex-wrap items-center gap-3 text-xs">
+                          {p.googleMap && (
+                            <a href={p.googleMap} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-[color:var(--gold)] hover:underline">
+                              <LinkIcon className="h-3.5 w-3.5" /> View Location
+                            </a>
+                          )}
+                          {(p.googleMap && (p.youtubeVideo || p.instagramVideo)) && <span className="text-border">|</span>}
+                          {p.youtubeVideo && (
+                            <a href={p.youtubeVideo} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-red-500 hover:underline">
+                              <Youtube className="h-3.5 w-3.5" /> Watch Video
+                            </a>
+                          )}
+                          {(!p.youtubeVideo && p.instagramVideo) && (
+                            <a href={p.instagramVideo} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-pink-500 hover:underline">
+                              <Instagram className="h-3.5 w-3.5" /> Watch Video
+                            </a>
+                          )}
+                        </div>
+                      )}
+                      
                       <Link
                         to="/projects/$id"
                         params={{ id: p.id }}
                         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--ink)] py-2.5 text-xs font-semibold text-white transition hover:bg-[color:var(--gold)] hover:text-black"
                       >
-                        View Project <ArrowRight className="h-3.5 w-3.5" />
+                        View Project Details <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
                     </div>
                   </div>

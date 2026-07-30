@@ -11,6 +11,10 @@ import {
   ShieldCheck,
   ArrowRight,
   Loader2,
+  Youtube,
+  Instagram,
+  Link as LinkIcon,
+  Ruler
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -90,35 +94,48 @@ function ProjectDetailPage() {
             </Link>
           </div>
 
-          {/* Title Header */}
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between border-b border-border pb-8">
-            <div>
-              <div className="flex items-center gap-3">
-                <span
-                  className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider text-white ${
-                    project.status === "Completed"
-                      ? "bg-emerald-600"
-                      : "bg-[color:var(--gold)] text-black"
-                  }`}
-                >
-                  {project.status}
-                </span>
-                <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                  {project.category === "plotted" ? (
-                    <Building2 className="h-3.5 w-3.5 text-[color:var(--gold)]" />
-                  ) : (
-                    <Trees className="h-3.5 w-3.5 text-[color:var(--gold)]" />
-                  )}
-                  {project.category === "plotted" ? "Plotted Development" : "Farmland Development"}
-                </span>
-              </div>
-              <h1 className="mt-2 font-display text-3xl font-bold md:text-5xl">{project.name}</h1>
-              <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4 text-[color:var(--gold)] flex-shrink-0" />
-                {project.location} • {project.subLocation}
-              </p>
+          <div className="flex flex-col gap-4 border-b border-border pb-8">
+            <div className="flex items-center gap-3">
+              <span
+                className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider text-white ${
+                  project.status === "Completed"
+                    ? "bg-emerald-600"
+                    : "bg-[color:var(--gold)] text-black"
+                }`}
+              >
+                {project.status}
+              </span>
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                {project.category === "plotted" ? (
+                  <Building2 className="h-3.5 w-3.5 text-[color:var(--gold)]" />
+                ) : (
+                  <Trees className="h-3.5 w-3.5 text-[color:var(--gold)]" />
+                )}
+                {project.category === "plotted" ? "Plotted Development" : "Farmland Development"}
+              </span>
             </div>
-
+            
+            <h1 className="mt-2 font-display text-3xl font-bold md:text-5xl">{project.name}</h1>
+            
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 text-sm text-muted-foreground">
+              <div>
+                <strong className="block text-foreground mb-1">Project Location</strong>
+                <p className="flex items-start gap-1.5">
+                  <MapPin className="h-4 w-4 text-[color:var(--gold)] flex-shrink-0 mt-0.5" />
+                  Location: {project.location} {project.subLocation ? `• ${project.subLocation}` : ''}
+                </p>
+              </div>
+              
+              {project.developmentArea && (
+                <div>
+                  <strong className="block text-foreground mb-1">Project Size</strong>
+                  <p className="flex items-start gap-1.5">
+                    <Ruler className="text-[color:var(--gold)] flex-shrink-0 mt-0.5 h-4 w-4" />
+                    Development Area: {project.developmentArea}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Image Gallery */}
@@ -149,50 +166,40 @@ function ProjectDetailPage() {
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{project.description}</p>
               </div>
 
-              {/* Technical Specifications */}
-              {project.specs.length > 0 && (
-                <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-                  <h3 className="font-display text-xl font-bold">Project Specifications</h3>
-                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                    {project.specs.map((s, i) => (
-                      <div key={i} className="rounded-xl bg-muted/60 p-4 border border-border/50">
-                        <span className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                          {s.label}
-                        </span>
-                        <span className="mt-1 block text-sm font-bold">{s.value}</span>
-                      </div>
-                    ))}
+              {/* Location & Media */}
+              {(project.googleMap || project.youtubeVideo || project.instagramVideo) && (
+                <div>
+                  <h3 className="font-display text-xl font-bold">Location & Media</h3>
+                  <div className="mt-4 flex flex-col gap-3">
+                    {project.googleMap && (
+                      <a href={project.googleMap} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[color:var(--gold)] hover:underline">
+                        <LinkIcon className="h-4 w-4" /> Google Map Location
+                      </a>
+                    )}
+                    {project.youtubeVideo && (
+                      <a href={project.youtubeVideo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-red-500 hover:underline">
+                        <Youtube className="h-4 w-4" /> YouTube Project Video
+                      </a>
+                    )}
+                    {project.instagramVideo && (
+                      <a href={project.instagramVideo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-pink-500 hover:underline">
+                        <Instagram className="h-4 w-4" /> Instagram Project Video
+                      </a>
+                    )}
                   </div>
                 </div>
               )}
 
-              {/* Highlights */}
-              {project.highlights.length > 0 && (
+              {/* Infrastructure & Construction Works Completed */}
+              {project.infrastructureWorks && project.infrastructureWorks.length > 0 && (
                 <div>
-                  <h3 className="font-display text-xl font-bold">Key Highlights</h3>
+                  <h3 className="font-display text-xl font-bold">Infrastructure & Construction Works Completed</h3>
                   <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                    {project.highlights.map((h, i) => (
+                    {project.infrastructureWorks.map((work, i) => (
                       <div key={i} className="flex items-start gap-3 rounded-xl border border-border bg-card p-4">
                         <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[color:var(--gold)]" />
-                        <span className="text-sm font-medium">{h}</span>
+                        <span className="text-sm font-medium">{work}</span>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Amenities */}
-              {project.amenities.length > 0 && (
-                <div>
-                  <h3 className="font-display text-xl font-bold">Layout Amenities</h3>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.amenities.map((a, i) => (
-                      <span
-                        key={i}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-4 py-2 text-xs font-semibold"
-                      >
-                        <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--gold)]" /> {a}
-                      </span>
                     ))}
                   </div>
                 </div>
