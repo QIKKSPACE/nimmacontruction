@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import img1 from "@/assets/svc/survey-1.jpg";
-import img2 from "@/assets/svc/survey-2.jpg";
-import img3 from "@/assets/svc/survey-3.jpg";
+import img1 from "@/assets/svc/site-identification-1.png";
+import img2 from "@/assets/svc/site-identification-2.png";
+import img3 from "@/assets/svc/site-identification-3.png";
 
 const TITLE = "Site Identification Works";
 const TAGLINE = "Professional plot number boards & site identification signage.";
@@ -37,6 +37,7 @@ function Page() {
         "Professional branding"
       ]}
       process={[]}
+      imagePosition="object-top"
     />
   );
 }

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import img1 from "@/assets/svc/landscape-1.jpg";
-import img2 from "@/assets/svc/landscape-2.jpg";
-import img3 from "@/assets/svc/landscape-3.jpg";
+import img1 from "@/assets/svc/tree-plantation-1.jpeg";
+import img2 from "@/assets/svc/tree-plantation-2.png";
+import img3 from "@/assets/svc/tree-plantation-3.png";
 
 const TITLE = "Tree Plantation & Landscaping";
 const TAGLINE = "Avenue tree plantations & garden landscaping for developments.";

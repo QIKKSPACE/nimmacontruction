@@ -6,6 +6,7 @@ import heroImg from "@/assets/about/about-hero.jpg";
 import founderImg from "@/assets/about/about-founder.png";
 import site1 from "@/assets/about/about-site-1.png";
 import site2 from "@/assets/about/about-site-2.png";
+import logoImg from "@/assets/NIMMAMETRO.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -82,8 +83,39 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* Story Section */}
+      {/* Leadership */}
       <section className="py-20">
+        <div className="container-x grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
+          <div className="order-2 lg:order-1">
+            <div className="overflow-hidden rounded-2xl">
+              <img
+                src={founderImg}
+                alt="Mr. Beerappa N, Founder of Nimmametro Constructions"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+          <div className="order-1 lg:order-2">
+            <p className="eyebrow">Leadership</p>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl">Founded by Mr. Beerappa N</h2>
+            <p className="mt-6 text-muted-foreground">
+              Nimmametro Constructions was established with a vision to provide landowners and developers
+              with a complete end-to-end development solution. Under the leadership of Mr. Beerappa
+              N, the company is growing into a reliable partner for plotted developments, farmland
+              projects and land infrastructure across Karnataka.
+            </p>
+            <p className="mt-4 text-muted-foreground">
+              We are committed to creating organized, modern, and environmentally responsible
+              communities that improve the quality of life for citizens while maximizing the value
+              of every development.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Story Section */}
+      <section className="bg-[color:var(--cream)] py-20">
         <div className="container-x grid gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
             <p className="eyebrow">Our story</p>
@@ -111,60 +143,15 @@ function AboutPage() {
               of every development.
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div className="aspect-[4/3] overflow-hidden rounded-2xl sm:col-span-2">
+          <div className="flex items-center justify-center">
+            <div className="w-full overflow-hidden rounded-2xl border border-border/50 shadow-lg">
               <img
-                src={site2}
-                alt="Nimmametro Constructions completed development entrance"
+                src={logoImg}
+                alt="Nimmametro Logo"
                 loading="lazy"
-                className="h-full w-full object-cover"
+                className="h-auto w-full object-cover"
               />
             </div>
-            <div className="aspect-[4/3] overflow-hidden rounded-2xl">
-              <img
-                src={site1}
-                alt="Nimmametro Constructions land development site work"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="rounded-2xl border border-border bg-[color:var(--cream)] p-6">
-              <p className="font-display text-3xl font-bold text-[color:var(--ink)] md:text-4xl">Quality</p>
-              <p className="mt-2 text-sm uppercase tracking-widest text-[color:var(--gold)]">
-                Excellence Delivered
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Leadership */}
-      <section className="bg-[color:var(--cream)] py-20">
-        <div className="container-x grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
-          <div className="order-2 lg:order-1">
-            <div className="overflow-hidden rounded-2xl">
-              <img
-                src={founderImg}
-                alt="Mr. Beerappa N, Founder of Nimmametro Constructions"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-          <div className="order-1 lg:order-2">
-            <p className="eyebrow">Leadership</p>
-            <h2 className="mt-3 font-display text-3xl md:text-4xl">Founded by Mr. Beerappa N</h2>
-            <p className="mt-6 text-muted-foreground">
-              Nimmametro Constructions was established with a vision to provide landowners and developers
-              with a complete end-to-end development solution. Under the leadership of Mr. Beerappa
-              N, the company is growing into a reliable partner for plotted developments, farmland
-              projects and land infrastructure across Karnataka.
-            </p>
-            <p className="mt-4 text-muted-foreground">
-              We are committed to creating organized, modern, and environmentally responsible
-              communities that improve the quality of life for citizens while maximizing the value
-              of every development.
-            </p>
           </div>
         </div>
       </section>

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import img1 from "@/assets/svc/drainage-1.jpg";
-import img2 from "@/assets/svc/drainage-2.jpg";
-import img3 from "@/assets/svc/drainage-3.jpg";
+import img1 from "@/assets/svc/rcc-drainage-1.jpg";
+import img2 from "@/assets/svc/rcc-drainage-2.jpg";
+import img3 from "@/assets/svc/rcc-drainage-3.jpg";
 
 const TITLE = "Storm Water Drainage";
 const TAGLINE = "Engineered drainage that keeps communities dry through the heaviest monsoon.";

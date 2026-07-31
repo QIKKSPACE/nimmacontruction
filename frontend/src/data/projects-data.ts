@@ -1,4 +1,5 @@
-const API_URL = "http://localhost/nimmabackend/api/projects.php";
+import { API } from "@/lib/api";
+const API_URL = API.projects;
 
 export type ProjectItem = {
   id: string;

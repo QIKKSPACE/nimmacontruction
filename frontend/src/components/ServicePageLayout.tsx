@@ -14,10 +14,12 @@ export type ServicePageProps = {
   features: string[];
   process: { step: string; detail: string }[];
   children?: React.ReactNode;
+  imagePosition?: string;
 };
 
 export function ServicePageLayout(props: ServicePageProps) {
   const others = serviceList.filter((s) => s.slug !== props.slug).slice(0, 3);
+  const imagePosClass = props.imagePosition || "object-center";
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -83,7 +85,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                   src={g}
                   alt={`${props.title} ${i + 1}`}
                   loading="lazy"
-                  className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                  className={`h-full w-full object-cover transition duration-700 hover:scale-105 ${imagePosClass}`}
                 />
               </div>
             ))}

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import img1 from "@/assets/svc/roads-1.jpg";
-import img2 from "@/assets/svc/roads-2.jpg";
-import img3 from "@/assets/svc/roads-3.jpg";
+import img1 from "@/assets/svc/paver-1.jpg";
+import img2 from "@/assets/svc/paver-2.jpg";
+import img3 from "@/assets/svc/paver-3.jpg";
 
 const TITLE = "Footpath & Paver Installation";
 const TAGLINE = "Pedestrian pathways & paver block installation for layouts.";

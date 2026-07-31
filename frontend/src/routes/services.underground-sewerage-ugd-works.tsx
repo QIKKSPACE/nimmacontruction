@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import img1 from "@/assets/svc/drainage-1.jpg";
-import img2 from "@/assets/svc/drainage-2.jpg";
-import img3 from "@/assets/svc/drainage-3.jpg";
+import img1 from "@/assets/svc/ugd-1.jpg";
+import img2 from "@/assets/svc/ugd-2.jpg";
+import img3 from "@/assets/svc/ugd-3.jpg";
 
 const TITLE = "Underground Sewerage (UGD) Works";
 const TAGLINE = "Hygienic underground sewerage systems & chambers for layouts.";
@@ -28,7 +28,7 @@ function Page() {
       title={TITLE}
       tagline={TAGLINE}
       intro="Developing efficient underground sewerage systems for plotted layouts with properly designed pipelines, chambers, and drainage connections. Our UGD solutions ensure hygienic waste management, improved sanitation, and reliable infrastructure for sustainable residential and farmland developments."
-      heroImg={img1}
+      heroImg={img2}
       gallery={[img1, img2, img3]}
       features={[
         "Efficient pipeline design",

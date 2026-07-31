@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   Phone,
   Mail,
@@ -16,18 +16,19 @@ import {
   Globe,
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
+import { API } from "@/lib/api";
 import { SiteFooter } from "@/components/SiteFooter";
 import { socialLinks } from "@/data/social-links";
 import { fetchAllProjects, type ProjectItem } from "@/data/projects-data";
 import { Loader2 } from "lucide-react";
 import logoAsset from "@/assets/nimma-metro-logo.jpeg.asset.json";
-import heroPlottedDev from "@/assets/hero-plotted-dev.jpg";
 import servicePlotted from "@/assets/service-plotted.jpg";
 import serviceFarmland from "@/assets/service-farmland.jpg";
 import serviceApprovals from "@/assets/service-approvals.jpg";
 import serviceSales from "@/assets/service-sales.jpg";
 import serviceTurnkey from "@/assets/service-turnkey.jpg";
 import serviceMarketing from "@/assets/service-marketing.jpg";
+import aboutFounder from "@/assets/about/about-founder.png";
 import projectValley from "@/assets/project-valley.jpg";
 import projectVss from "@/assets/project-vss.jpg";
 import projectKr from "@/assets/project-kr.jpg";
@@ -116,8 +117,8 @@ function Home() {
       <SiteHeader />
       <Hero />
       <About />
-      <Services />
       <LatestProjects />
+      <Services />
       <ContactForm />
       <SiteFooter />
     </div>
@@ -182,7 +183,7 @@ function Header({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => voi
               </a>
             ))}
             <a
-              href="#contact"
+              href="#contact-form"
               onClick={() => setOpen(false)}
               className="rounded-full border-2 border-[color:var(--gold)] px-6 py-2.5 text-center text-sm font-semibold text-[color:var(--gold)]"
             >
@@ -195,38 +196,125 @@ function Header({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => voi
   );
 }
 
+interface HeroSlide {
+  id: number;
+  img_url: string;
+}
+
+interface HeroContent {
+  title: string;
+  subtitle: string;
+  btn1_label: string;
+  btn1_url: string;
+  btn2_label: string;
+  btn2_url: string;
+}
+
+const DEFAULT_HERO_CONTENT: HeroContent = {
+  title: "Transforming Land into Landmarks",
+  subtitle: "Building Karnataka's future through premium plotted developments, residential layouts, and sustainable infrastructure.",
+  btn1_label: "Plotted Developments",
+  btn1_url: "/projects/plotted-development",
+  btn2_label: "Farmland Projects",
+  btn2_url: "/projects/farmland-development",
+};
+
 function Hero() {
+  const [slides, setSlides] = useState<HeroSlide[]>([]);
+  const [current, setCurrent] = useState(0);
+  const [heroContent, setHeroContent] = useState<HeroContent>(DEFAULT_HERO_CONTENT);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    fetch(API.hero)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.status && Array.isArray(data.data) && data.data.length > 0) {
+          setSlides(data.data);
+        }
+      })
+      .catch(() => {});
+
+    fetch(`${API.hero}?type=content`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.status && data.data) setHeroContent(data.data);
+      })
+      .catch(() => {});
+  }, []);
+
+  const goTo = useCallback((idx: number) => {
+    setCurrent(idx);
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrent((c) => (c + 1) % (slides.length || 1));
+    }, 5000);
+  }, [slides.length]);
+
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    timerRef.current = setInterval(() => {
+      setCurrent((c) => (c + 1) % slides.length);
+    }, 5000);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [slides]);
+
   return (
-    <section className="relative isolate">
-      <img
-        src={heroPlottedDev}
-        alt="Transforming Land into Landmarks by Nimmametro Constructions"
-        width={1920}
-        height={1080}
-        className="absolute inset-0 h-full w-full object-cover object-center"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/30" />
+    <section className="relative isolate overflow-hidden bg-[color:var(--ink)]">
+      {/* DB slides — cross-fade between them */}
+      {slides.map((slide, i) => (
+        <img
+          key={slide.id}
+          src={slide.img_url}
+          alt={`Hero Slide ${i + 1}`}
+          className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ${
+            i === current ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      ))}
+
+      {/* Gradient for text legibility */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/30 to-transparent" />
+
       <div className="container-x relative flex min-h-[82vh] flex-col justify-center py-24 text-white">
         <h1 className="max-w-4xl font-display text-4xl leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl">
-          Transforming Land into Landmarks
+          {heroContent.title}
         </h1>
         <p className="mt-6 max-w-2xl text-base text-white/85 sm:text-lg md:text-xl leading-relaxed">
-          Building Karnataka&apos;s future through premium plotted developments, residential layouts, and sustainable infrastructure.
+          {heroContent.subtitle}
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
           <Link
-            to="/projects/plotted-development"
+            to={heroContent.btn1_url as "/projects/plotted-development"}
             className="inline-flex items-center gap-2 rounded-full bg-[color:var(--gold)] px-7 py-3.5 text-sm font-semibold text-[color:var(--gold-foreground)] shadow-lg transition hover:brightness-95"
           >
-            Plotted Developments <ArrowRight className="h-4 w-4" />
+            {heroContent.btn1_label} <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            to="/projects/farmland-development"
+            to={heroContent.btn2_url as "/projects/farmland-development"}
             className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-black/30 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white hover:text-[color:var(--ink)]"
           >
-            Farmland Projects
+            {heroContent.btn2_label}
           </Link>
         </div>
+
+        {/* Slide dots */}
+        {slides.length > 1 && (
+          <div className="mt-10 flex items-center gap-2">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Slide ${i + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === current
+                    ? "w-7 bg-[color:var(--gold)]"
+                    : "w-2 bg-white/40 hover:bg-white/70"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -249,9 +337,6 @@ function About() {
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
             At Nimmametro Constructionss, we turn land into opportunity. Our expertise in plotted development, residential layouts, and infrastructure development ensures every project is built with quality, transparency, and long-term value.
-          </p>
-          <p className="mt-3 text-sm font-semibold text-[color:var(--gold)]">
-            Founded by Mr. Beerappa N
           </p>
           <Link
             to="/about"
@@ -311,6 +396,39 @@ function Services() {
               </div>
             </a>
           ))}
+        </div>
+
+        {/* Founder Section appended below services */}
+        <div className="mt-24 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-border sm:p-12 text-left">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+            <div className="order-2 lg:order-1">
+              <p className="eyebrow">Our Leadership</p>
+              <h3 className="mt-3 font-display text-3xl md:text-4xl">
+                Founded by Mr. Beerappa N
+              </h3>
+              <p className="mt-6 text-muted-foreground leading-relaxed">
+                With a vision to transform the real estate landscape in Karnataka, Mr. Beerappa N established Nimmametro Constructions. His leadership and commitment to legal transparency, quality construction, and a customer-first approach have been the driving force behind our turnkey end-to-end solutions.
+              </p>
+              <div className="mt-8">
+                <span className="inline-block border-b-2 border-[color:var(--gold)] pb-1 font-display text-lg tracking-wider text-[color:var(--ink)]">
+                  Mr. Beerappa N
+                </span>
+                <p className="mt-1 text-sm uppercase tracking-widest text-muted-foreground">
+                  Founder & Managing Director
+                </p>
+              </div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <div className="aspect-square overflow-hidden rounded-2xl bg-muted lg:aspect-[4/5]">
+                {/* Founder Image */}
+                <img
+                  src={aboutFounder}
+                  alt="Mr. Beerappa N - Founder"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -408,17 +526,10 @@ function LatestProjects() {
 function ContactForm() {
   return (
     <section id="contact" className="relative isolate overflow-hidden bg-[color:var(--ink)] py-24 text-white">
-      <img
-        src={heroPlottedDev}
-        alt=""
-        aria-hidden
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover opacity-15"
-      />
       <div className="container-x relative grid gap-12 lg:grid-cols-2">
 
         {/* LEFT: Title + Contact Info + Social */}
-        <div>
+        <div className="order-2 lg:order-1">
           <p className="eyebrow">Connect with us</p>
           <h2 className="mt-3 font-display text-4xl text-white md:text-5xl">
             Let's start something great together
@@ -472,6 +583,7 @@ function ContactForm() {
 
         {/* RIGHT: Enquiry Form */}
         <form
+          id="contact-form"
           onSubmit={async (e) => {
             e.preventDefault();
             const form = e.currentTarget;
@@ -484,7 +596,7 @@ function ContactForm() {
               message: formData.get("message")
             };
             try {
-              const res = await fetch("http://localhost/nimmabackend/api/enquiries.php", {
+              const res = await fetch(API.enquiries, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
@@ -501,7 +613,7 @@ function ContactForm() {
               console.error(err);
             }
           }}
-          className="grid gap-4 rounded-2xl bg-white/5 p-8 ring-1 ring-white/10 backdrop-blur"
+          className="order-1 lg:order-2 grid gap-4 rounded-2xl bg-white/5 p-8 ring-1 ring-white/10 backdrop-blur"
         >
           <Field label="Name" name="name" />
           <Field label="Contact Number" name="phone" type="tel" />

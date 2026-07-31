@@ -2,7 +2,7 @@ import plottedImg from "@/assets/svc/plotted-1.jpg";
 import farmlandImg from "@/assets/svc/farmland-1.jpg";
 import levelingImg from "@/assets/svc/leveling-1.jpg";
 import roadsImg from "@/assets/svc/roads-1.jpg";
-import drainageImg from "@/assets/svc/drainage-1.jpg";
+import drainageImg from "@/assets/svc/rcc-drainage-1.jpg";
 import waterImg from "@/assets/svc/water-1.jpg";
 import electricalImg from "@/assets/svc/electrical-1.jpg";
 import wallImg from "@/assets/svc/wall-1.jpg";

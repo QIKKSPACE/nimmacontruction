@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import img1 from "@/assets/svc/drainage-1.jpg";
-import img2 from "@/assets/svc/drainage-2.jpg";
-import img3 from "@/assets/svc/drainage-3.jpg";
+import img1 from "@/assets/svc/rcc-drainage-1.jpg";
+import img2 from "@/assets/svc/rcc-drainage-2.jpg";
+import img3 from "@/assets/svc/rcc-drainage-3.jpg";
+import img4 from "@/assets/svc/rcc-drainage-4.png";
 
 const TITLE = "RCC Drainage Works";
 const TAGLINE = "Robust RCC drainage solutions for plotted developments.";
@@ -29,7 +30,7 @@ function Page() {
       tagline={TAGLINE}
       intro="Providing robust RCC drainage solutions for plotted developments, ensuring efficient rainwater flow, proper water management, and durable infrastructure for well-planned communities."
       heroImg={img1}
-      gallery={[img1, img2, img3]}
+      gallery={[img1, img2, img3, img4]}
       features={[
         "Customized RCC drain channels",
         "High-capacity rainwater management",

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
-import img1 from "@/assets/svc/landscape-1.jpg";
-import img2 from "@/assets/svc/landscape-2.jpg";
-import img3 from "@/assets/svc/landscape-3.jpg";
+import img1 from "@/assets/svc/park-1.jpg";
+import img2 from "@/assets/svc/park-2.jpg";
+import img3 from "@/assets/svc/park-3.jpg";
 
 const TITLE = "Park Development";
 const TAGLINE = "Green recreational parks, play zones, and community open spaces.";
