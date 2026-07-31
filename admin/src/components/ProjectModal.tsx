@@ -30,6 +30,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const [youtubeVideo, setYoutubeVideo] = useState("");
   const [instagramVideo, setInstagramVideo] = useState("");
   const [infrastructureWorks, setInfrastructureWorks] = useState<string[]>([]);
+  const [customWork, setCustomWork] = useState("");
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -415,6 +416,61 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     {work}
                   </label>
                 ))}
+                {infrastructureWorks.filter(w => ![
+                  'Layout Planning & Design',
+                  'Entrance Arch Design & Construction',
+                  'RCC Drainage Works',
+                  'Water Supply Line Installation',
+                  'Underground Sewerage (UGD) Works',
+                  'Electrical Infrastructure (Poles & Underground Cabling)',
+                  'Tar Roads / CC Roads',
+                  'Footpath & Paver Works',
+                  'Park Development',
+                  'Tree Plantation & Landscaping',
+                  'Compound Wall Construction',
+                  'Plot Number & Name Board Installation'
+                ].includes(w)).map((work) => (
+                  <label key={work} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px', color: 'var(--text-muted)' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={true}
+                      onChange={(e) => {
+                        setInfrastructureWorks(infrastructureWorks.filter(w => w !== work));
+                      }}
+                    />
+                    {work} <span style={{fontSize: '10px', color: 'var(--gold)'}}>(Custom)</span>
+                  </label>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
+                <input 
+                  type="text" 
+                  className="form-input" 
+                  placeholder="Add unique feature..." 
+                  value={customWork}
+                  onChange={e => setCustomWork(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      if (customWork.trim() && !infrastructureWorks.includes(customWork.trim())) {
+                        setInfrastructureWorks([...infrastructureWorks, customWork.trim()]);
+                        setCustomWork("");
+                      }
+                    }
+                  }}
+                />
+                <button 
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    if (customWork.trim() && !infrastructureWorks.includes(customWork.trim())) {
+                      setInfrastructureWorks([...infrastructureWorks, customWork.trim()]);
+                      setCustomWork("");
+                    }
+                  }}
+                >
+                  Add Custom
+                </button>
               </div>
             </div>
           </div>

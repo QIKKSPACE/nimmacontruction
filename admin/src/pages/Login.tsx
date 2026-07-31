@@ -54,7 +54,7 @@ export const Login: React.FC = () => {
             N
           </div>
           <h2 style={{ fontSize: "24px", fontWeight: "800", color: "#fff" }}>
-            NIMMA METRO
+            Nimmametro Constructions
           </h2>
           <p style={{ fontSize: "14px", color: "var(--text-muted)", marginTop: "4px" }}>
             JWT Control Panel Login

@@ -65,7 +65,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <TrendingUp size={14} /> System Active
           </div>
           <h2 style={{ fontSize: "26px", fontWeight: "800", color: "#fff", margin: 0 }}>
-            Nimma Metro Admin Control Panel
+            Nimmametro Constructions Admin Control Panel
           </h2>
           <p style={{ color: "var(--text-muted)", fontSize: "14px", marginTop: "6px" }}>
             Manage plotted developments, farmland projects, layout content, and customer contact inquiries.

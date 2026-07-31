@@ -37,7 +37,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         <div className="sidebar-header">
           <div className="sidebar-logo-icon">N</div>
           <div>
-            <div className="sidebar-logo-text">NIMMA METRO</div>
+            <div className="sidebar-logo-text" style={{ fontSize: "14px" }}>Nimmametro Constructions</div>
             <div style={{ fontSize: "11px", color: "var(--gold)", fontWeight: 600 }}>
               ADMIN PANEL
             </div>
