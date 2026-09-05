@@ -1,12 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const Route = createFileRoute('/terms-conditions')({
-  component: TermsConditions,
-})
 
-function TermsConditions() {
+
+export default function TermsConditions() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <SiteHeader />

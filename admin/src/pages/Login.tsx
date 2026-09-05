@@ -5,8 +5,8 @@ import { Lock, Mail, ArrowRight, ShieldCheck, Loader2 } from "lucide-react";
 import { API_BASE } from "../lib/api";
 
 export const Login: React.FC = () => {
-  const [email, setEmail] = useState("admin@nimmametro.com");
-  const [password, setPassword] = useState("admin123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { login } = useAuth();

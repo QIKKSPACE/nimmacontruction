@@ -4,10 +4,12 @@
 export const API_BASE = import.meta.env.VITE_API_BASE_URL as string;
 
 export const API = {
-  projects:  `${API_BASE}/projects.php`,
-  enquiries: `${API_BASE}/enquiries.php`,
-  upload:    `${API_BASE}/upload.php`,
-  hero:      `${API_BASE}/hero.php`,
-  login:     `${API_BASE}/login.php`,
-  verify:    `${API_BASE}/verify.php`,
+  projects:  `${API_BASE.replace(/\/$/, '')}/projects.php`,
+  enquiries: `${API_BASE.replace(/\/$/, '')}/enquiries.php`,
+  leads:     `${API_BASE.replace(/\/$/, '')}/leads.php`,
+  invoices:  `${API_BASE.replace(/\/$/, '')}/invoices.php`,
+  upload:    `${API_BASE.replace(/\/$/, '')}/upload.php`,
+  hero:      `${API_BASE.replace(/\/$/, '')}/hero.php`,
+  login:     `${API_BASE.replace(/\/$/, '')}/login.php`,
+  verify:    `${API_BASE.replace(/\/$/, '')}/verify.php`,
 };

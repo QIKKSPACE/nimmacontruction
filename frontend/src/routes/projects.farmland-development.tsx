@@ -1,18 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { MapPin, CheckCircle2, ArrowRight, Loader2, Youtube, Instagram, Link as LinkIcon, Ruler } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { fetchFarmlandProjects, type ProjectItem } from "@/data/projects-data";
 
-export const Route = createFileRoute("/projects/farmland-development")({
-  head: () => ({
-    meta: [{ title: "Farmland Development Projects | Nimmametro Constructions" }],
-  }),
-  component: FarmlandProjectsPage,
-});
 
-function FarmlandProjectsPage() {
+
+export default function FarmlandProjectsPage() {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -85,18 +80,8 @@ function FarmlandProjectsPage() {
                       {p.developmentArea && (
                         <p className="mt-1.5 flex items-start gap-1.5 text-xs text-muted-foreground">
                           <Ruler className="text-[color:var(--gold)] flex-shrink-0 h-4 w-4" />
-                          {p.developmentArea}
+                          {p.developmentArea.replace(/acres?/i, '').trim()} Acres Development
                         </p>
-                      )}
-
-                      {/* Project Highlights */}
-                      {p.description && (
-                        <div className="mt-4">
-                          <strong className="block text-xs uppercase tracking-wider text-foreground mb-1">Project Highlights</strong>
-                          <p className="text-sm text-foreground/80 line-clamp-3 leading-relaxed">
-                            {p.description}
-                          </p>
-                        </div>
                       )}
 
                       {/* Completed Works Preview */}
@@ -142,8 +127,7 @@ function FarmlandProjectsPage() {
                       )}
                       
                       <Link
-                        to="/projects/$id"
-                        params={{ id: p.id }}
+                        to={`/projects/${p.id }`}
                         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--ink)] py-2.5 text-xs font-semibold text-white transition hover:bg-[color:var(--gold)] hover:text-black"
                       >
                         View Project Details <ArrowRight className="h-3.5 w-3.5" />

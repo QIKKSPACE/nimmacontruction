@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
 import img1 from "@/assets/svc/water-1.jpg";
 import img2 from "@/assets/svc/water-2.jpg";
@@ -7,21 +6,9 @@ import img3 from "@/assets/svc/water-3.jpg";
 const TITLE = "Water Pipeline Networks";
 const TAGLINE = "Reliable pressurised water on tap, to every plot and every home.";
 
-export const Route = createFileRoute("/services/water-pipeline-networks")({
-  head: () => ({
-    meta: [
-      { title: `${TITLE} | Nimmametro Constructions` },
-      { name: "description", content: TAGLINE },
-      { property: "og:title", content: `${TITLE} | Nimmametro Constructions` },
-      { property: "og:description", content: TAGLINE },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: Page,
-});
 
-function Page() {
+
+export default function Page() {
   return (
     <ServicePageLayout
       slug="water-pipeline-networks"

@@ -122,6 +122,12 @@ export const Projects: React.FC<ProjectsProps> = ({
           >
             <TreePine size={14} /> Land / Farmland ({projects.filter((p) => p.category === "farmland").length})
           </button>
+          <button
+            className={`btn ${filterCategory === "other" ? "btn-primary" : "btn-secondary"} btn-sm`}
+            onClick={() => setFilterCategory("other")}
+          >
+            <Building2 size={14} /> Other Dev ({projects.filter((p) => p.category === "other").length})
+          </button>
         </div>
       </div>
 
@@ -138,12 +144,9 @@ export const Projects: React.FC<ProjectsProps> = ({
         >
           <Building2 size={48} color="var(--gold)" style={{ margin: "0 auto 16px", opacity: 0.8 }} />
           <h3 style={{ fontSize: "18px", fontWeight: 700, color: "#fff" }}>No Projects Found</h3>
-          <p style={{ color: "var(--text-muted)", fontSize: "14px", marginTop: "6px" }}>
-            There are no projects uploaded yet. Click below to upload your first project.
+          <p style={{ color: "var(--text-muted)", fontSize: "14px", marginTop: "4px" }}>
+            No projects match the current search filter. Try adding a new project!
           </p>
-          <button className="btn btn-primary" style={{ marginTop: "20px" }} onClick={onOpenAddProject}>
-            <Plus size={18} /> Upload Project
-          </button>
         </div>
       ) : (
         <div
@@ -153,42 +156,39 @@ export const Projects: React.FC<ProjectsProps> = ({
             gap: "24px",
           }}
         >
-        {filtered.map((p) => (
-          <div
-            key={p.id}
-            style={{
-              background: "var(--bg-card)",
-              border: "1px solid var(--border)",
-              borderRadius: "18px",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-              transition: "transform 0.2s ease, border-color 0.2s ease",
-            }}
-          >
-            <div style={{ position: "relative", height: "180px" }}>
-              <img
-                src={p.img}
-                alt={p.name}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  top: "12px",
-                  left: "12px",
-                  display: "flex",
-                  gap: "8px",
-                }}
-              >
-                <span
-                  className={`badge ${
-                    p.category === "plotted" ? "badge-plotted" : "badge-farmland"
-                  }`}
+          {filtered.map((p) => (
+            <div key={p.id} className="project-card">
+              <div className="project-card-image">
+                <img
+                  src={p.img}
+                  alt={p.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "12px",
+                    left: "12px",
+                    display: "flex",
+                    gap: "8px",
+                  }}
                 >
-                  {p.category === "plotted" ? "Plotted Dev" : "Farmland Dev"}
-                </span>
-              </div>
+                  <span
+                    className={`badge ${
+                      p.category === "plotted"
+                        ? "badge-plotted"
+                        : p.category === "farmland"
+                        ? "badge-farmland"
+                        : "badge-info"
+                    }`}
+                  >
+                    {p.category === "plotted"
+                      ? "Plotted Dev"
+                      : p.category === "farmland"
+                      ? "Farmland Dev"
+                      : "Other Dev"}
+                  </span>
+                </div>
               <span
                 className={`badge ${
                   p.status === "Completed"

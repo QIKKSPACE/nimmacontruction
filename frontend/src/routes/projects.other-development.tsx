@@ -3,16 +3,14 @@ import { useState, useEffect } from "react";
 import { MapPin, CheckCircle2, ArrowRight, Loader2, Youtube, Instagram, Link as LinkIcon, Ruler } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { fetchPlottedProjects, type ProjectItem } from "@/data/projects-data";
+import { fetchOtherProjects, type ProjectItem } from "@/data/projects-data";
 
-
-
-export default function PlottedProjectsPage() {
+export default function OtherProjectsPage() {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchPlottedProjects().then((data) => {
+    fetchOtherProjects().then((data) => {
       setProjects(data);
       setLoading(false);
     });
@@ -25,9 +23,9 @@ export default function PlottedProjectsPage() {
       <main className="py-12">
         <div className="container-x">
           <div className="border-b border-border pb-6">
-            <h1 className="font-display text-3xl font-bold md:text-4xl">Plotted Development Projects</h1>
+            <h1 className="font-display text-3xl font-bold md:text-4xl">Other Development Projects</h1>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              At Nimmametro Constructions, every project reflects our commitment to quality, precision, and timely execution. We transform raw land into well-planned residential layouts, farmland developments, and infrastructure-ready communities.
+              Explore specialized land development, commercial, compound wall, and customized infrastructure projects executed by Nimmametro Constructions across Karnataka.
             </p>
           </div>
 
@@ -38,7 +36,7 @@ export default function PlottedProjectsPage() {
             </div>
           ) : projects.length === 0 ? (
             <div className="py-24 text-center text-muted-foreground">
-              <p className="text-lg">No plotted development projects available yet.</p>
+              <p className="text-lg">No other development projects available yet.</p>
               <p className="mt-2 text-sm">Check back soon for new listings!</p>
             </div>
           ) : (
@@ -66,7 +64,6 @@ export default function PlottedProjectsPage() {
                     >
                       {p.status}
                     </span>
-
                   </div>
 
                   <div className="flex flex-1 flex-col justify-between p-6">
@@ -127,7 +124,7 @@ export default function PlottedProjectsPage() {
                       )}
                       
                       <Link
-                        to={`/projects/${p.id }`}
+                        to={`/projects/${p.id}`}
                         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--ink)] py-2.5 text-xs font-semibold text-white transition hover:bg-[color:var(--gold)] hover:text-black"
                       >
                         View Project Details <ArrowRight className="h-3.5 w-3.5" />

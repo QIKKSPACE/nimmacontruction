@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import type { Project, ProjectCategory, ProjectStatus } from "../types";
-import { X, Plus, Trash2, Upload, Star, Loader2, Image as ImageIcon } from "lucide-react";
+import { X, Upload, Star, Loader2, Image as ImageIcon } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { API } from "../lib/api";
 
@@ -118,20 +118,20 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     e.preventDefault();
     const finalCover = coverImg || (gallery.length > 0 ? gallery[0] : "");
 
-    if (!name || !location || !finalCover) {
-      toast.error("Please fill in project name, location, and wait for image to finish uploading.", { duration: 4000 });
-      return;
-    }
+    const slug = name.trim()
+      ? name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
+      : "project";
+    const generatedId = `${slug || "project"}-${Date.now()}`;
 
     const newProject: Project = {
-      id: editingProject ? editingProject.id : name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-      name,
+      id: editingProject ? editingProject.id : generatedId,
+      name: name || "",
       category,
-      location,
+      location: location || "",
       subLocation,
       status,
       img: finalCover,
-      gallery: gallery.length > 0 ? gallery : [finalCover],
+      gallery: gallery.length > 0 ? gallery : (finalCover ? [finalCover] : []),
       description,
       developmentArea,
       googleMap,
@@ -176,6 +176,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               >
                 <option value="plotted">Plotted Development Project</option>
                 <option value="farmland">Land / Farmland Development Project</option>
+                <option value="other">Other Development Project</option>
               </select>
             </div>
 
@@ -188,7 +189,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 placeholder="e.g. Nimma Royal Greens"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                required
               />
             </div>
 
@@ -202,7 +202,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   placeholder="e.g. Village, Taluk, District, Karnataka"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  required
                 />
               </div>
 
@@ -434,7 +433,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     <input 
                       type="checkbox" 
                       checked={true}
-                      onChange={(e) => {
+                      onChange={(_e) => {
                         setInfrastructureWorks(infrastructureWorks.filter(w => w !== work));
                       }}
                     />

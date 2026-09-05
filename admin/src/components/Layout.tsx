@@ -12,6 +12,8 @@ import {
   Images,
 } from "lucide-react";
 
+import logoImg from "../assets/logo.png";
+
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, logout } = useAuth();
   const location = useLocation();
@@ -27,15 +29,25 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     { label: "Dashboard", path: "/", icon: LayoutDashboard },
     { label: "Projects", path: "/projects", icon: Building2 },
     { label: "Enquiries", path: "/enquiries", icon: MessageSquare },
+    { label: "Mini CRM", path: "/crm", icon: UserCheck },
+    { label: "Quotation Maker", path: "/quotations", icon: Images },
     { label: "Hero Slider", path: "/hero-slider", icon: Images },
   ];
 
   return (
     <div className="admin-layout">
+      {/* Mobile Backdrop Overlay */}
+      {mobileOpen && (
+        <div 
+          className="sidebar-backdrop"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
       <aside className={`sidebar ${mobileOpen ? "open" : ""}`}>
         <div className="sidebar-header">
-          <div className="sidebar-logo-icon">N</div>
+          <img src={logoImg} alt="Logo" style={{ width: "36px", height: "36px", borderRadius: "50%", objectFit: "contain", background: "#fff" }} />
           <div>
             <div className="sidebar-logo-text" style={{ fontSize: "14px" }}>Nimmametro Constructions</div>
             <div style={{ fontSize: "11px", color: "var(--gold)", fontWeight: 600 }}>
@@ -87,8 +99,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="btn btn-secondary btn-sm"
-              style={{ display: "none" }} // Show on mobile via CSS if needed
+              className="btn btn-secondary btn-sm mobile-menu-toggle"
+              aria-label="Toggle navigation menu"
             >
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -99,6 +111,10 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 ? "Projects Management"
                 : location.pathname === "/enquiries"
                 ? "Contact Enquiries"
+                : location.pathname === "/crm"
+                ? "Mini CRM & Lead Tracker"
+                : location.pathname === "/quotations"
+                ? "Quotation & Invoice PDF Maker"
                 : location.pathname === "/hero-slider"
                 ? "Hero Slider"
                 : "Admin"}

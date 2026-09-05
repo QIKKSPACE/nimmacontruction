@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
 import img1 from "@/assets/svc/farmland-1.jpg";
 import img2 from "@/assets/svc/farmland-2.jpg";
@@ -7,21 +6,9 @@ import img3 from "@/assets/svc/farmland-3.jpg";
 const TITLE = "Farmland Development";
 const TAGLINE = "Weekend farmlands that combine nature, agriculture and long-term value.";
 
-export const Route = createFileRoute("/services/farmland-development")({
-  head: () => ({
-    meta: [
-      { title: `${TITLE} | Nimmametro Constructions` },
-      { name: "description", content: TAGLINE },
-      { property: "og:title", content: `${TITLE} | Nimmametro Constructions` },
-      { property: "og:description", content: TAGLINE },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: Page,
-});
 
-function Page() {
+
+export default function Page() {
   return (
     <ServicePageLayout
       slug="farmland-development"

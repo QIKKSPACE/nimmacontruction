@@ -1,37 +1,17 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Phone, Mail, MapPin } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import heroImg from "@/assets/about/about-hero.jpg";
 import founderImg from "@/assets/about/about-founder.png";
-import site1 from "@/assets/about/about-site-1.png";
+import site1 from "@/assets/about/about-end.jpg";
 import site2 from "@/assets/about/about-site-2.png";
 import logoImg from "@/assets/NIMMAMETRO.png";
 
-export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Us | Nimmametro Constructions" },
-      {
-        name: "description",
-        content:
-          "Nimmametro Constructions is a modern plotted development and land development company in Karnataka, specializing in well-planned residential layouts, farmland projects, and infrastructure-ready developments.",
-      },
-      { property: "og:title", content: "About Us | Nimmametro Constructions" },
-      {
-        property: "og:description",
-        content:
-          "Transforming raw land into well-planned residential layouts, farmland projects and infrastructure-ready developments across Karnataka.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: AboutPage,
-});
+
 
 const stats = [
-  { n: "100%", l: "Legal Transparency" },
+  { n: "100%", l: "Construction Transparency" },
   { n: "End-to-End", l: "Land Solutions" },
   { n: "Quality", l: "Infrastructure Focus" },
 ];
@@ -56,7 +36,7 @@ const mission = [
   "Develop modern infrastructure that supports future-ready communities.",
 ];
 
-function AboutPage() {
+export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -281,8 +261,7 @@ function AboutPage() {
                 </div>
               </div>
               <Link
-                to="/"
-                hash="contact"
+                to="/#contact"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-[color:var(--ink)] px-7 py-3 text-sm font-semibold text-white transition hover:bg-[color:var(--gold)] hover:text-[color:var(--gold-foreground)]"
               >
                 Contact Us <ArrowRight className="h-4 w-4" />

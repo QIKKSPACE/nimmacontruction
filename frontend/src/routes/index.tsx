@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
   Phone,
@@ -14,13 +14,14 @@ import {
   Menu,
   X,
   Globe,
+  Loader2,
 } from "lucide-react";
-import { SiteHeader } from "@/components/SiteHeader";
 import { API } from "@/lib/api";
+import { SiteHeader } from "@/components/SiteHeader";
+import { ServicesCarousel } from "@/components/ServicesCarousel";
 import { SiteFooter } from "@/components/SiteFooter";
 import { socialLinks } from "@/data/social-links";
 import { fetchAllProjects, type ProjectItem } from "@/data/projects-data";
-import { Loader2 } from "lucide-react";
 import logoAsset from "@/assets/nimma-metro-logo.jpeg.asset.json";
 import servicePlotted from "@/assets/service-plotted.jpg";
 import serviceFarmland from "@/assets/service-farmland.jpg";
@@ -39,9 +40,7 @@ import interior1 from "@/assets/interior-1.jpg";
 import interior2 from "@/assets/interior-2.jpg";
 import interior3 from "@/assets/interior-3.jpg";
 
-export const Route = createFileRoute("/")({
-  component: Home,
-});
+
 
 const nav = [
   { label: "Home", href: "#home" },
@@ -109,7 +108,7 @@ const blogs = [
   },
 ];
 
-function Home() {
+export default function Home() {
   const [open, setOpen] = useState(false);
   void open; void setOpen;
   return (
@@ -276,7 +275,7 @@ function Hero() {
       {/* Gradient for text legibility */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/30 to-transparent" />
 
-      <div className="container-x relative flex min-h-[82vh] flex-col justify-center py-24 text-white">
+      <div className="container-x relative flex min-h-[70vh] flex-col justify-center py-14 md:py-18 text-white">
         <h1 className="max-w-4xl font-display text-4xl leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl">
           {heroContent.title}
         </h1>
@@ -322,13 +321,13 @@ function Hero() {
 
 function About() {
   const stats = [
-    { n: "100%", l: "Legal Transparency" },
+    { n: "100%", l: "Construction Transparency" },
     { n: "Turnkey", l: "End-to-End Solutions" },
     { n: "Quality", l: "Construction Standards" },
     { n: "Customer", l: "First Approach" },
   ];
   return (
-    <section id="about" className="py-24">
+    <section id="about" className="py-12 md:py-14">
       <div className="container-x grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
           <p className="eyebrow">About Us</p>
@@ -362,7 +361,7 @@ function About() {
 
 function Services() {
   return (
-    <section id="services" className="bg-[color:var(--cream)] py-24">
+    <section id="services" className="bg-[color:var(--cream)] py-12 md:py-14">
       <div className="container-x">
         <div className="mx-auto max-w-2xl text-center">
           <p className="eyebrow">What we do</p>
@@ -399,7 +398,7 @@ function Services() {
         </div>
 
         {/* Founder Section appended below services */}
-        <div className="mt-24 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-border sm:p-12 text-left">
+        <div className="mt-10 md:mt-12 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-border sm:p-12 text-left">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="order-2 lg:order-1">
               <p className="eyebrow">Our Leadership</p>
@@ -439,6 +438,8 @@ function LatestProjects() {
   const [allProjects, setAllProjects] = useState<ProjectItem[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     fetchAllProjects().then((data) => {
       setAllProjects(data);
@@ -446,8 +447,46 @@ function LatestProjects() {
     });
   }, []);
 
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer || allProjects.length === 0) return;
+
+    let intervalId: NodeJS.Timeout;
+    
+    const startAutoScroll = () => {
+      intervalId = setInterval(() => {
+        if (!scrollContainer) return;
+        
+        const scrollAmount = scrollContainer.clientWidth;
+        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+        
+        if (scrollContainer.scrollLeft >= maxScroll - 10) {
+          scrollContainer.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      }, 3000);
+    };
+
+    startAutoScroll();
+
+    const handleMouseEnter = () => clearInterval(intervalId);
+    const handleMouseLeave = () => startAutoScroll();
+
+    scrollContainer.addEventListener('mouseenter', handleMouseEnter);
+    scrollContainer.addEventListener('mouseleave', handleMouseLeave);
+    
+    return () => {
+      clearInterval(intervalId);
+      scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
+      scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [allProjects]);
+
   return (
-    <section id="projects" className="py-24 bg-background">
+    <>
+      <ServicesCarousel title="Services" eyebrow="Explore more" />
+      <section id="projects" className="py-10 md:py-12 bg-background">
       <div className="container-x">
         <div className="max-w-2xl">
           <p className="eyebrow">Featured Projects</p>
@@ -467,11 +506,15 @@ function LatestProjects() {
             <p className="mt-2 text-sm">Check back soon for new listings!</p>
           </div>
         ) : (
-          <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div 
+            ref={scrollRef}
+            className="mt-14 flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             {allProjects.map((p) => (
               <article
                 key={p.id}
-                className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-border transition hover:shadow-xl"
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] flex-shrink-0 snap-start group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-border transition hover:shadow-xl"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <img
@@ -506,8 +549,7 @@ function LatestProjects() {
                   </div>
                   <div className="mt-6 border-t border-border pt-4">
                     <Link
-                      to="/projects/$id"
-                      params={{ id: p.id }}
+                      to={`/projects/${p.id }`}
                       className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--ink)] py-2.5 text-xs font-semibold text-white transition hover:bg-[color:var(--gold)] hover:text-black"
                     >
                       View Project <ArrowRight className="h-3.5 w-3.5" />
@@ -520,12 +562,13 @@ function LatestProjects() {
         )}
       </div>
     </section>
+    </>
   );
 }
 
 function ContactForm() {
   return (
-    <section id="contact" className="relative isolate overflow-hidden bg-[color:var(--ink)] py-24 text-white">
+    <section id="contact" className="relative isolate overflow-hidden bg-[color:var(--ink)] py-12 md:py-14 text-white">
       <div className="container-x relative grid gap-12 lg:grid-cols-2">
 
         {/* LEFT: Title + Contact Info + Social */}

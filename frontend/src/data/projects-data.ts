@@ -4,7 +4,7 @@ const API_URL = API.projects;
 export type ProjectItem = {
   id: string;
   name: string;
-  category: "plotted" | "farmland";
+  category: "plotted" | "farmland" | "other";
   location: string;
   subLocation: string;
   status: "Completed" | "Ongoing" | "Upcoming";
@@ -64,6 +64,12 @@ export async function fetchPlottedProjects(): Promise<ProjectItem[]> {
 export async function fetchFarmlandProjects(): Promise<ProjectItem[]> {
   const all = await fetchAllProjects();
   return all.filter((p) => p.category === "farmland");
+}
+
+// Fetch only other development projects
+export async function fetchOtherProjects(): Promise<ProjectItem[]> {
+  const all = await fetchAllProjects();
+  return all.filter((p) => p.category === "other");
 }
 
 // Fetch single project by ID

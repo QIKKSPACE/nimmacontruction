@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
 import img1 from "@/assets/svc/compound-wall-1.png";
 import img2 from "@/assets/svc/compound-wall-2.png";
@@ -7,21 +6,9 @@ import img3 from "@/assets/svc/compound-wall-3.png";
 const TITLE = "Compound Wall Construction";
 const TAGLINE = "Durable precast & hollow block boundary walls for layout security.";
 
-export const Route = createFileRoute("/services/compound-wall-construction")({
-  head: () => ({
-    meta: [
-      { title: `${TITLE} | Nimmametro Constructions` },
-      { name: "description", content: TAGLINE },
-      { property: "og:title", content: `${TITLE} | Nimmametro Constructions` },
-      { property: "og:description", content: TAGLINE },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: Page,
-});
 
-function Page() {
+
+export default function Page() {
   return (
     <ServicePageLayout
       slug="compound-wall-construction"

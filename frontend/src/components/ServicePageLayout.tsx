@@ -1,4 +1,5 @@
-import { Link } from "@tanstack/react-router";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Phone, Mail } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -18,8 +19,24 @@ export type ServicePageProps = {
 };
 
 export function ServicePageLayout(props: ServicePageProps) {
-  const others = serviceList.filter((s) => s.slug !== props.slug).slice(0, 3);
+  const allOthers = serviceList.filter((s) => s.slug !== props.slug);
   const imagePosClass = props.imagePosition || "object-center";
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        if (scrollLeft + clientWidth >= scrollWidth - 10) {
+          scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          const itemWidth = scrollRef.current.children[0]?.clientWidth || 0;
+          scrollRef.current.scrollBy({ left: itemWidth, behavior: 'smooth' });
+        }
+      }
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -53,16 +70,15 @@ export function ServicePageLayout(props: ServicePageProps) {
               Get a scoping call and a preliminary estimate for your project.
             </p>
             <div className="mt-6 space-y-3 text-sm">
-              <a href="tel:+918884898765" className="flex items-center gap-2 hover:text-[color:var(--gold)]">
-                <Phone className="h-4 w-4 text-[color:var(--gold)]" /> 888-4898-765
+              <a href="tel:+919148806063" className="flex items-center gap-2 hover:text-[color:var(--gold)]">
+                <Phone className="h-4 w-4 text-[color:var(--gold)]" /> +91 91488 06063
               </a>
-              <a href="mailto:info@nimmametro.com" className="flex items-center gap-2 hover:text-[color:var(--gold)]">
-                <Mail className="h-4 w-4 text-[color:var(--gold)]" /> info@nimmametro.com
+              <a href="mailto:constructions@nimmametro.com" className="flex items-center gap-2 hover:text-[color:var(--gold)]">
+                <Mail className="h-4 w-4 text-[color:var(--gold)]" /> constructions@nimmametro.com
               </a>
             </div>
             <Link
-              to="/"
-              hash="contact"
+              to="/#contact"
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-[color:var(--ink)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[color:var(--gold)] hover:text-[color:var(--gold-foreground)]"
             >
               Request Quote <ArrowRight className="h-4 w-4" />
@@ -136,28 +152,33 @@ export function ServicePageLayout(props: ServicePageProps) {
               <h2 className="mt-3 font-display text-3xl md:text-4xl">Other services</h2>
             </div>
           </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {others.map((o) => (
-              <Link
-                key={o.slug}
-                to={o.to}
-                className="group overflow-hidden rounded-2xl bg-card ring-1 ring-border transition hover:shadow-xl"
-              >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={o.img}
-                    alt={o.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display text-lg">{o.title}</h3>
-                  <span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--gold)]">
-                    Learn more <ArrowRight className="h-4 w-4" />
-                  </span>
-                </div>
-              </Link>
+          <div 
+            ref={scrollRef}
+            className="mt-10 flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {allOthers.map((o) => (
+              <div key={o.slug} className="w-full sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+                <Link
+                  to={o.to}
+                  className="group block h-full overflow-hidden rounded-2xl bg-card ring-1 ring-border transition hover:shadow-xl"
+                >
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img
+                      src={o.img}
+                      alt={o.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-display text-lg">{o.title}</h3>
+                    <span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--gold)]">
+                      Learn more <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </div>
+                </Link>
+              </div>
             ))}
           </div>
         </div>

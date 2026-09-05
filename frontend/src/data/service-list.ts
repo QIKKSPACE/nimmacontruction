@@ -3,12 +3,16 @@ import farmlandImg from "@/assets/svc/farmland-1.jpg";
 import levelingImg from "@/assets/svc/leveling-1.jpg";
 import roadsImg from "@/assets/svc/roads-1.jpg";
 import drainageImg from "@/assets/svc/rcc-drainage-1.jpg";
+import ugdImg from "@/assets/svc/ugd-1.jpg";
 import waterImg from "@/assets/svc/water-1.jpg";
 import electricalImg from "@/assets/svc/electrical-1.jpg";
-import wallImg from "@/assets/svc/wall-1.jpg";
-import landscapeImg from "@/assets/svc/landscape-1.jpg";
+import paverImg from "@/assets/svc/paver-1.jpg";
+import parkImg from "@/assets/svc/park-1.jpg";
+import treeImg from "@/assets/svc/tree-plantation-1.jpeg";
+import compoundImg from "@/assets/svc/compound-wall-1.png";
+import siteIdImg from "@/assets/svc/site-identification-1.png";
+import entranceImg from "@/assets/svc/Entrance Arch Design-1.jpeg";
 import surveyImg from "@/assets/svc/survey-1.jpg";
-import endtoendImg from "@/assets/svc/endtoend-1.jpg";
 
 export type ServiceListItem = {
   slug: string;
@@ -69,7 +73,7 @@ export const serviceList: ServiceListItem[] = [
     title: "Underground Sewerage (UGD) Works",
     tagline: "Hygienic underground sewerage systems & chambers for layouts.",
     intro: "Developing efficient underground sewerage systems for plotted layouts with properly designed pipelines, chambers, and drainage connections. Our UGD solutions ensure hygienic waste management, improved sanitation, and reliable infrastructure for sustainable residential and farmland developments.",
-    img: drainageImg,
+    img: ugdImg,
   },
   {
     slug: "electrical-infrastructure",
@@ -93,7 +97,7 @@ export const serviceList: ServiceListItem[] = [
     title: "Footpath & Paver Installation",
     tagline: "Pedestrian pathways & paver block installation for layouts.",
     intro: "Creating well-designed pedestrian pathways and open spaces with high-quality paver blocks, ensuring safety, accessibility, and aesthetic appeal across plotted developments. Our footpath solutions include proper leveling, durable paver installation, edge finishing, and integration with landscape areas to provide smooth walkways and enhance the overall look and functionality of residential layouts and farmland projects.",
-    img: roadsImg,
+    img: paverImg,
   },
   {
     slug: "park-development",
@@ -101,7 +105,7 @@ export const serviceList: ServiceListItem[] = [
     title: "Park Development",
     tagline: "Green recreational parks, play zones, and community open spaces.",
     intro: "Designing and developing attractive green spaces within plotted layouts with thoughtfully planned parks, walking areas, play zones, seating spaces, and landscaping features. Our park development solutions enhance community living by creating refreshing, sustainable, and well-maintained recreational spaces that add beauty, value, and a better lifestyle experience to residential and farmland developments.",
-    img: landscapeImg,
+    img: parkImg,
   },
   {
     slug: "tree-plantation-landscaping",
@@ -109,7 +113,7 @@ export const serviceList: ServiceListItem[] = [
     title: "Tree Plantation & Landscaping",
     tagline: "Avenue tree plantations & garden landscaping for developments.",
     intro: "Creating beautiful and sustainable green environments for plotted developments through planned tree plantation, landscape design, and greenery solutions. Our landscaping services include avenue plantations, garden development, lawn areas, and green zones that enhance the aesthetics, improve the environment, and create a healthier living experience for residential layouts and farmland projects.",
-    img: landscapeImg,
+    img: treeImg,
   },
   {
     slug: "compound-wall-construction",
@@ -117,7 +121,7 @@ export const serviceList: ServiceListItem[] = [
     title: "Compound Wall Construction",
     tagline: "Durable precast & hollow block boundary walls for layout security.",
     intro: "Providing durable and secure boundary solutions for plotted developments using hollow block walls and precast concrete walls. Our compound wall construction ensures strong protection, clear site demarcation, and enhanced project aesthetics with quality materials, proper alignment, and long-lasting finishes for residential layouts and farmland developments.",
-    img: wallImg,
+    img: compoundImg,
   },
   {
     slug: "site-identification-works",
@@ -125,7 +129,7 @@ export const serviceList: ServiceListItem[] = [
     title: "Site Identification Works",
     tagline: "Professional plot number boards & site identification signage.",
     intro: "Providing professional plot identification solutions for plotted developments through plot number boards, name boards, and site identification signage. Our services ensure clear visibility, easy plot navigation, and a well-organized layout presentation, enhancing customer experience and project branding.",
-    img: surveyImg,
+    img: siteIdImg,
   },
   {
     slug: "entrance-arch-design-construction",
@@ -133,6 +137,6 @@ export const serviceList: ServiceListItem[] = [
     title: "Entrance Arch Design & Construction",
     tagline: "Architectural landmark entrance arches & gateway construction.",
     intro: "Creating attractive and landmark entrance arches for plotted developments that enhance project identity and create a welcoming first impression. Our solutions include architectural design, structural development, branding elements, and durable construction to deliver a premium entry experience for residential layouts and farmland projects.",
-    img: endtoendImg,
+    img: entranceImg,
   },
 ];

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Trash2, Loader2, ImagePlus, Images, Type, Save } from "lucide-react";
 import { toast } from "react-hot-toast";
-import { API, API_BASE } from "../lib/api";
+import { API } from "../lib/api";
 
 interface Slide {
   id: number;

@@ -1,12 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const Route = createFileRoute('/privacy-policy')({
-  component: PrivacyPolicy,
-})
 
-function PrivacyPolicy() {
+
+export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <SiteHeader />

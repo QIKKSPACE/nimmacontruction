@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   MapPin,
@@ -14,20 +14,23 @@ import {
   Youtube,
   Instagram,
   Link as LinkIcon,
-  Ruler
+  Ruler,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { fetchProjectById, type ProjectItem } from "@/data/projects-data";
 
-export const Route = createFileRoute("/projects/$id")({
-  component: ProjectDetailPage,
-});
 
-function ProjectDetailPage() {
-  const { id } = Route.useParams();
+
+export default function ProjectDetailPage() {
+  const { id } = useParams();
   const [project, setProject] = useState<ProjectItem | undefined>(undefined);
   const [loading, setLoading] = useState(true);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
   useEffect(() => {
     fetchProjectById(id).then((data) => {
@@ -68,15 +71,37 @@ function ProjectDetailPage() {
     );
   }
 
+  // Gather all unique uploaded project images
+  const rawImages = [
+    ...(project.gallery && project.gallery.length > 0 ? project.gallery : []),
+    project.img
+  ].filter((url): url is string => Boolean(url && url.trim()));
+
+  const allImages = Array.from(new Set(rawImages));
+
   const backLink =
     project.category === "plotted"
       ? "/projects/plotted-development"
-      : "/projects/farmland-development";
+      : project.category === "farmland"
+      ? "/projects/farmland-development"
+      : "/projects/other-development";
 
   const backLabel =
     project.category === "plotted"
       ? "Plotted Development Projects"
-      : "Farmland Development Projects";
+      : project.category === "farmland"
+      ? "Farmland Development Projects"
+      : "Other Development Projects";
+
+  const handlePrevImage = () => {
+    if (selectedImageIndex === null) return;
+    setSelectedImageIndex((prev) => (prev === 0 ? allImages.length - 1 : (prev as number) - 1));
+  };
+
+  const handleNextImage = () => {
+    if (selectedImageIndex === null) return;
+    setSelectedImageIndex((prev) => (prev === allImages.length - 1 ? 0 : (prev as number) + 1));
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -111,7 +136,11 @@ function ProjectDetailPage() {
                 ) : (
                   <Trees className="h-3.5 w-3.5 text-[color:var(--gold)]" />
                 )}
-                {project.category === "plotted" ? "Plotted Development" : "Farmland Development"}
+                {project.category === "plotted"
+                  ? "Plotted Development"
+                  : project.category === "farmland"
+                  ? "Farmland Development"
+                  : "Other Development"}
               </span>
             </div>
             
@@ -138,23 +167,91 @@ function ProjectDetailPage() {
             </div>
           </div>
 
-          {/* Image Gallery */}
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <div className="md:col-span-2 aspect-[16/10] overflow-hidden rounded-2xl bg-muted ring-1 ring-border">
-              <img
-                src={project.img}
-                alt={project.name}
-                className="h-full w-full object-cover"
-              />
+          {/* Square Image Gallery (All Images) */}
+          {allImages.length > 0 && (
+            <div className="mt-8 space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="font-display text-xl font-bold">Project Photos</h2>
+                <span className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">
+                  {allImages.length} {allImages.length === 1 ? "Image" : "Images"}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 sm:gap-4">
+                {allImages.map((imgUrl, i) => (
+                  <div
+                    key={i}
+                    onClick={() => setSelectedImageIndex(i)}
+                    className="group relative aspect-square overflow-hidden rounded-2xl bg-muted ring-1 ring-border shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:ring-[color:var(--gold)] cursor-pointer"
+                  >
+                    <img
+                      src={imgUrl}
+                      alt={`${project.name} photo ${i + 1}`}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                      <span className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 bg-black/75 text-white text-xs px-3 py-1.5 rounded-full font-medium backdrop-blur-sm flex items-center gap-1.5 shadow-lg">
+                        <Maximize2 className="h-3.5 w-3.5 text-[color:var(--gold)]" /> View Full
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex flex-col gap-4">
-              {project.gallery.slice(1, 3).map((g, i) => (
-                <div key={i} className="aspect-[16/10] overflow-hidden rounded-2xl bg-muted ring-1 ring-border flex-1">
-                  <img src={g} alt={`${project.name} ${i + 2}`} className="h-full w-full object-cover" />
+          )}
+
+          {/* Lightbox Modal */}
+          {selectedImageIndex !== null && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md"
+              onClick={() => setSelectedImageIndex(null)}
+            >
+              <div
+                className="relative max-h-[90vh] max-w-[90vw] flex flex-col items-center justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setSelectedImageIndex(null)}
+                  className="absolute -top-12 right-0 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20 focus:outline-none"
+                  aria-label="Close modal"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-2xl">
+                  <img
+                    src={allImages[selectedImageIndex]}
+                    alt={`${project.name} large preview ${selectedImageIndex + 1}`}
+                    className="max-h-[80vh] max-w-[85vw] object-contain"
+                  />
                 </div>
-              ))}
+
+                {allImages.length > 1 && (
+                  <>
+                    <button
+                      onClick={handlePrevImage}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-3 text-white backdrop-blur-sm transition hover:bg-black/80 hover:scale-110 focus:outline-none"
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft className="h-6 w-6" />
+                    </button>
+                    <button
+                      onClick={handleNextImage}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-3 text-white backdrop-blur-sm transition hover:bg-black/80 hover:scale-110 focus:outline-none"
+                      aria-label="Next image"
+                    >
+                      <ChevronRight className="h-6 w-6" />
+                    </button>
+
+                    <div className="mt-3 text-xs font-semibold tracking-wider text-white/80">
+                      {selectedImageIndex + 1} / {allImages.length}
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Details & Sidebar Grid */}
           <div className="mt-12 grid gap-12 lg:grid-cols-3">
@@ -211,28 +308,27 @@ function ProjectDetailPage() {
               <div className="sticky top-24 rounded-2xl border border-border bg-card p-6 shadow-lg">
                 <h3 className="font-display text-xl font-bold">Interested in {project.name}?</h3>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  Get full layout plans, pricing sheets, and arrange a private site visit.
+                  Get Layout Development Consultation & Pricing — Schedule a Site Visit.
                 </p>
 
                 <div className="mt-6 space-y-4 text-sm">
                   <a
-                    href="tel:+918884898765"
+                    href="tel:+919148806063"
                     className="flex items-center gap-3 rounded-xl border border-border bg-muted/50 p-3 font-semibold transition hover:border-[color:var(--gold)]"
                   >
-                    <Phone className="h-4 w-4 text-[color:var(--gold)]" /> 888-4898-765
+                    <Phone className="h-4 w-4 text-[color:var(--gold)]" /> +91 91488 06063
                   </a>
                   <a
-                    href="mailto:info@nimmametro.com"
+                    href="mailto:constructions@nimmametro.com"
                     className="flex items-center gap-3 rounded-xl border border-border bg-muted/50 p-3 font-semibold transition hover:border-[color:var(--gold)]"
                   >
-                    <Mail className="h-4 w-4 text-[color:var(--gold)]" /> info@nimmametro.com
+                    <Mail className="h-4 w-4 text-[color:var(--gold)]" /> constructions@nimmametro.com
                   </a>
                 </div>
 
                 <div className="mt-6 border-t border-border pt-6">
                   <Link
-                    to="/"
-                    hash="contact"
+                    to="/#contact"
                     className="flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--gold)] py-3 text-sm font-bold text-black transition hover:bg-[color:var(--gold)]/90"
                   >
                     Book A Site Visit <ArrowRight className="h-4 w-4" />

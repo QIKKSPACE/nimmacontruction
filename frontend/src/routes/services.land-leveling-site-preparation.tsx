@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
 import img1 from "@/assets/svc/leveling-1.jpg";
 import img2 from "@/assets/svc/leveling-2.jpg";
@@ -7,21 +6,9 @@ import img3 from "@/assets/svc/leveling-3.jpg";
 const TITLE = "Land Leveling & Site Preparation";
 const TAGLINE = "The invisible groundwork that makes great projects possible.";
 
-export const Route = createFileRoute("/services/land-leveling-site-preparation")({
-  head: () => ({
-    meta: [
-      { title: `${TITLE} | Nimmametro Constructions` },
-      { name: "description", content: TAGLINE },
-      { property: "og:title", content: `${TITLE} | Nimmametro Constructions` },
-      { property: "og:description", content: TAGLINE },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: Page,
-});
 
-function Page() {
+
+export default function Page() {
   return (
     <ServicePageLayout
       slug="land-leveling-site-preparation"

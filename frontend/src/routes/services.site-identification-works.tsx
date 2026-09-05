@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout } from "@/components/ServicePageLayout";
 import img1 from "@/assets/svc/site-identification-1.png";
 import img2 from "@/assets/svc/site-identification-2.png";
@@ -7,21 +6,9 @@ import img3 from "@/assets/svc/site-identification-3.png";
 const TITLE = "Site Identification Works";
 const TAGLINE = "Professional plot number boards & site identification signage.";
 
-export const Route = createFileRoute("/services/site-identification-works")({
-  head: () => ({
-    meta: [
-      { title: `${TITLE} | Nimmametro Constructions` },
-      { name: "description", content: TAGLINE },
-      { property: "og:title", content: `${TITLE} | Nimmametro Constructions` },
-      { property: "og:description", content: TAGLINE },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: Page,
-});
 
-function Page() {
+
+export default function Page() {
   return (
     <ServicePageLayout
       slug="site-identification-works"

@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { serviceList } from "@/data/service-list";
@@ -36,8 +36,7 @@ export function SiteHeader() {
         <Logo />
         <nav className="hidden items-center gap-8 lg:flex">
           <Link
-            to="/"
-            hash="home"
+            to="/#home"
             className="text-sm font-medium text-white/80 transition hover:text-[color:var(--gold)]"
           >
             Home
@@ -105,14 +104,19 @@ export function SiteHeader() {
                   >
                     Farmland Development
                   </Link>
+                  <Link
+                    to="/projects/other-development"
+                    className="block rounded-md px-3 py-2 text-sm text-white/80 transition hover:bg-white/5 hover:text-[color:var(--gold)]"
+                  >
+                    Other Development
+                  </Link>
                 </div>
               </div>
             )}
           </div>
         </nav>
         <Link
-          to="/"
-          hash="contact"
+          to="/#contact"
           className="hidden rounded-full border-2 border-[color:var(--gold)] px-6 py-2.5 text-sm font-semibold text-[color:var(--gold)] transition hover:bg-[color:var(--gold)] hover:text-[color:var(--gold-foreground)] lg:inline-flex"
         >
           Contact Us
@@ -129,8 +133,7 @@ export function SiteHeader() {
         <div className="border-t border-white/10 bg-[color:var(--ink)] lg:hidden">
           <div className="container-x flex flex-col gap-3 py-6">
             <Link
-              to="/"
-              hash="home"
+              to="/#home"
               onClick={() => setOpen(false)}
               className="text-sm font-medium text-white/80"
             >
@@ -186,12 +189,18 @@ export function SiteHeader() {
                 >
                   Farmland Development
                 </Link>
+                <Link
+                  to="/projects/other-development"
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-white/70 hover:text-[color:var(--gold)]"
+                >
+                  Other Development
+                </Link>
               </div>
             )}
 
             <Link
-              to="/"
-              hash="contact"
+              to="/#contact"
               onClick={() => setOpen(false)}
               className="rounded-full border-2 border-[color:var(--gold)] px-6 py-2.5 text-center text-sm font-semibold text-[color:var(--gold)]"
             >
